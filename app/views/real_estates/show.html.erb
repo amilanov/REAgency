@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Realestatetype:</b>
+  <%= @real_estate.realEstateType %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @real_estate.address %>
+</p>
+
+<p>
+  <b>Realestatename:</b>
+  <%= @real_estate.realEstateName %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @real_estate.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_real_estate_path(@real_estate) %> |
+<%= link_to 'Back', real_estates_path %>

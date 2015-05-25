@@ -1,0 +1,35 @@
+<h1>Listing admins</h1>
+
+<table>
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Address</th>
+    <th>Username</th>
+    <th>Password</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admins.each do |admin| %>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+    <td class="list_description"><dl><dt><%= admin.firstName %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.lastName %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.phone %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.email %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.address %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.username %></dt></dl></td>
+    <td class="list_description"><dl><dt><%= admin.password %></dt></dl></td>
+    <td class="list_actions"><%= link_to 'Show', admin %></td>
+    <td class="list_actions"><%= link_to 'Edit', edit_admin_path(admin) %></td>
+    <td class="list_actions"><%= link_to 'Destroy', admin, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Admin', new_admin_path %>

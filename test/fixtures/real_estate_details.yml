@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  size: MyString
+  images: MyString
+  realEstateType: MyString
+  condition: MyString
+  note: MyString
+  real_estate_id: 1
+
+two:
+  size: MyString
+  images: MyString
+  realEstateType: MyString
+  condition: MyString
+  note: MyString
+  real_estate_id: 1

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Size:</b>
+  <%= @real_estate_detail.size %>
+</p>
+
+<p>
+  <b>Images:</b>
+  <%= @real_estate_detail.images %>
+</p>
+
+<p>
+  <b>Realestatetype:</b>
+  <%= @real_estate_detail.realEstateType %>
+</p>
+
+<p>
+  <b>Condition:</b>
+  <%= @real_estate_detail.condition %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @real_estate_detail.note %>
+</p>
+
+<p>
+  <b>Real estate:</b>
+  <%= @real_estate_detail.real_estate_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_real_estate_detail_path(@real_estate_detail) %> |
+<%= link_to 'Back', real_estate_details_path %>
