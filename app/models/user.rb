@@ -14,7 +14,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :username, :password, :password_confirmation, :firstName, :lastName, :address
+  attr_accessible :name, :email, :username, :password, :password_confirmation, :firstName, :lastName, :address, :avatar
   has_secure_password
 
   belongs_to :city
@@ -23,11 +23,14 @@ class User < ActiveRecord::Base
 
   before_save { |user| user.email = email.downcase }
 
-  validates :firstName, :lastName, :username, :password, presence: true
+  validates :firstName, :lastName, :username, presence: true
   validates :username, uniqueness: true, presence: true
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+
+  has_attached_file :avatar, styles: { medium: '200x200>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}
 end

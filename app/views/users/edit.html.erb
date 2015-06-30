@@ -1,6 +1,35 @@
 <h1>Editing user</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+
+      <%= f.label :firstName %>
+      <%= f.text_field :firstName %>
+
+      <%= f.label :lastName %>
+      <%= f.text_field :lastName %>
+
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :avatar %>
+      <%= f.file_field :avatar, class: "file_upload" %>
+
+      <%= f.submit "Edit my account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
