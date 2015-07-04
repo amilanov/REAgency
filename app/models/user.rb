@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :activities
 
   before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
 
   validates :firstName, :lastName, :username, presence: true
   validates :username, uniqueness: true, presence: true
@@ -33,4 +34,10 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, styles: { medium: '200x200>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}
+
+  private
+
+  def create_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
+  end
 end
