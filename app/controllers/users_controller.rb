@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
+  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :correct_user, only: [:edit, :update]
+  before_filter :admin_user, only: [:destroy]
+
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    byebug
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -34,23 +39,25 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
-        sign_in @user
+      if user.save
+        user_role = Role.where(roleName: 'user').first
+        user.user_roles.create(role_id: user_role.id)
+
+        sign_in user
         flash[:success] = 'User was successfully created.'
-        format.html { redirect_to @user }
-        format.json { render json: @user, status: :created, location: @user }
+        format.html { redirect_to user }
+        format.json { render json: user, status: :created, location: user }
       else
         format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,6 +69,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        sign_in @user
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,10 +84,28 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
+    flash[:success] = 'User was successfully destroyed.'
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_path, notice: 'Please sign in.'
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to root_path unless current_user?(@user)
+  end
+
+  def admin_user
+    redirect_to root_path unless current_user.admin?
   end
 end

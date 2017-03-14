@@ -9,8 +9,9 @@
 #
 
 class UserRole < ActiveRecord::Base
-  has_many :users
+  attr_accessible :user_id
+  attr_accessible :role_id
 
-  validates :roleName, presence: true
-  validates :roleName, uniqueness: true
+  belongs_to :user
+  belongs_to :role
 end

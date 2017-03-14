@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
   has_secure_password
 
   belongs_to :city
-  belongs_to :user_role
+  has_many :user_roles
+  has_many :roles, through: :user_roles
   has_many :activities
 
   before_save { |user| user.email = email.downcase }
@@ -32,8 +33,18 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 
-  has_attached_file :avatar, styles: { medium: '200x200>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
+  has_attached_file :avatar, styles: { medium: '200x200>', thumb: '100x100>' }, default_url: 'missing.png'
   validates_attachment_content_type :avatar, content_type: %r{\Aimage/.*\Z}
+
+  def admin?
+    is_admin = false
+
+    user_roles.each do |ur|
+      is_admin = true if ur.role[:roleName].eql?('admin')
+    end
+
+    is_admin
+  end
 
   private
 

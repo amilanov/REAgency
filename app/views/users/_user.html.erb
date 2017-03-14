@@ -1,0 +1,11 @@
+<li>
+  <div class="gravatar">
+      <div><%= image_tag user.avatar.url(:thumb), height: 52 %></div>
+  </div>
+  
+  <%= link_to "#{user.firstName} #{user.lastName}", user %>
+  
+  <% if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", user, method: :delete, confirm: "Are you sure?" %>
+  <% end %>
+</li>

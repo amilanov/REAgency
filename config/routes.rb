@@ -1,4 +1,7 @@
 REAgency::Application.routes.draw do
+  resources :roles
+
+
   resources :real_estate_details
 
   resources :managers
@@ -33,7 +36,7 @@ REAgency::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  match '/',    to: 'static_pages#home'
+  match '/',        to: 'static_pages#home'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

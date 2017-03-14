@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150703224434) do
+ActiveRecord::Schema.define(:version => 20170314204515) do
 
   create_table "activities", :force => true do |t|
     t.string   "activityName"
@@ -19,18 +19,6 @@ ActiveRecord::Schema.define(:version => 20150703224434) do
     t.datetime "endDate"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-  end
-
-  create_table "admins", :force => true do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "address"
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "cities", :force => true do |t|
@@ -56,31 +44,8 @@ ActiveRecord::Schema.define(:version => 20150703224434) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "employees", :force => true do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "address"
-    t.string   "username"
-    t.string   "password"
-    t.string   "profession"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "items", :force => true do |t|
     t.string   "itemType"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "managers", :force => true do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "address"
-    t.string   "phone"
-    t.string   "email"
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -120,6 +85,12 @@ ActiveRecord::Schema.define(:version => 20150703224434) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "roles", :force => true do |t|
+    t.string   "roleName"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "saved_items", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -134,9 +105,10 @@ ActiveRecord::Schema.define(:version => 20150703224434) do
   end
 
   create_table "user_roles", :force => true do |t|
-    t.string   "roleName"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.integer  "role_id"
   end
 
   create_table "users", :force => true do |t|
