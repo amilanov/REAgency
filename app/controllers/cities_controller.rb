@@ -24,7 +24,8 @@ class CitiesController < ApplicationController
   # GET /cities/new
   # GET /cities/new.json
   def new
-    @city = City.new
+    @city      = City.new
+    @countries = Country.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +41,8 @@ class CitiesController < ApplicationController
   # POST /cities
   # POST /cities.json
   def create
-    @city = City.new(params[:city])
+    @city      = City.new(params[:city])
+    @countries = Country.all
 
     respond_to do |format|
       if @city.save

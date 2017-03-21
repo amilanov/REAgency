@@ -11,10 +11,13 @@
 #
 
 class City < ActiveRecord::Base
+  attr_accessible :cityName, :postalCode, :country_id
+
   belongs_to :country
   has_many :real_estates
   has_many :users
 
   validates :cityName, :postalCode, presence: true
   validates :cityName, uniqueness: true
+  validates :country_id, presence: true
 end

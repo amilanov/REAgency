@@ -10,7 +10,9 @@
 #
 
 class Country < ActiveRecord::Base
-  has_many :cities
+  attr_accessible :countryName, :postalCode
+
+  has_many :cities, dependent: :destroy
   validates :countryName, :postalCode, presence: true
   validates :countryName, uniqueness: true
 end

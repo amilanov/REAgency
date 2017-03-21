@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update]
   before_filter :correct_user, only: [:edit, :update]
   before_filter :admin_user, only: [:destroy]
+  before_filter :can_sign_up, only: [:new]
 
   # GET /users
   # GET /users.json
@@ -47,9 +48,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if user.save
-        user_role = Role.where(roleName: 'user').first
-        user.user_roles.create(role_id: user_role.id)
-
+        user.assign_role('user')
         sign_in user
         flash[:success] = 'User was successfully created.'
         format.html { redirect_to user }
@@ -90,13 +89,6 @@ class UsersController < ApplicationController
 
   private
 
-  def signed_in_user
-    unless signed_in?
-      store_location
-      redirect_to signin_path, notice: 'Please sign in.'
-    end
-  end
-
   def correct_user
     @user = User.find(params[:id])
     redirect_to root_path unless current_user?(@user)
@@ -104,5 +96,13 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to root_path unless current_user.admin?
+  end
+
+  def can_sign_up
+    if signed_in?
+      admin_user
+    else
+      true
+    end
   end
 end

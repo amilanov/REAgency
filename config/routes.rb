@@ -3,13 +3,7 @@ REAgency::Application.routes.draw do
 
 
   resources :real_estate_details
-
-  resources :managers
-
   resources :tasks
-
-  resources :employees
-
   resources :reports
 
   resources :contracts
@@ -31,9 +25,6 @@ REAgency::Application.routes.draw do
   resources :users
 
   resources :countries
-
-  resources :admins
-
   resources :sessions, only: [:new, :create, :destroy]
 
   match '/',        to: 'static_pages#home'

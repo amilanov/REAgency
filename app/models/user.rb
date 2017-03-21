@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   belongs_to :city
-  has_many :user_roles
+  has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :activities
 
@@ -44,6 +44,11 @@ class User < ActiveRecord::Base
     end
 
     is_admin
+  end
+
+  def assign_role(role_name)
+    role = Role.get_role(role_name)
+    user_roles.create!(role: role)
   end
 
   private
