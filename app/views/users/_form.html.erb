@@ -1,5 +1,5 @@
 <%= form_for(@user, :html => {:class => "form-horizontal"}) do |f| %>
-  <%= render 'shared/error_messages' %>
+  <%= render 'shared/error_messages', object: @user %>
 
   <div class="form-group">
     <%= f.label :firstName %>
@@ -34,6 +34,21 @@
   <div class="form-group">
     <%= f.label :email %>
     <%= f.text_field :email, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.collection_select :role_ids, @user_roles, :id, :roleName, {:selected => @user.roles}, {class: "btn btn-primary dropdown-toggle", multiple: true} %>
+  </div>
+
+  <div class="form-group">
+    <%= select_tag :role_ids, options_from_collection_for_select(@user_roles, "id", "roleName"), :name => 'user[role_ids][]', multiple: true %>
+  </div>
+
+  <div class="form-group">
+    <% @user_roles.each do |role| %>
+      <%= check_box_tag :role_ids, role.id, @user.roles.include?(role), :name => 'user[role_ids][]' =%>
+      <%= label_tag :roles_ids, role.roleName =%>
+    <% end %>
   </div>
 
   <div class="form-group">

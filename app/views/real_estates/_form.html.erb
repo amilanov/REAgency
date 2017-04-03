@@ -1,33 +1,70 @@
-<%= form_for(@real_estate) do |f| %>
-  <% if @real_estate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@real_estate.errors.count, "error") %> prohibited this real_estate from being saved:</h2>
+<%= form_for(@real_estate, :html => { :class => "form-horizontal", multipart: true }) do |f| %>
+  <%= render 'shared/error_messages', object: @real_estate %>
 
-      <ul>
-      <% @real_estate.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="form-group">
+    <%= f.label :Real_estate_name %>
+    <%= f.text_field :realEstateName, :class => "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <span style="margin-left: 1px">
+      <%= f.label :city %>
+    </span>
+    <br/>
+    <span>
+      <%= f.collection_select :city_id, @cities, :id, :cityName, {:include_blank => 'Please Select'} %>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <span style="margin-left: 1px">
+      <%= f.label :real_estate_type %>
+    </span>
+    <br/>
+    <span>
+      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:include_blank => 'Please Select'} %>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <span style="margin-left: 1px">
+      <%= f.label :pictures %>
+    </span>
+    <br/>
+    <%= file_field_tag "images[]", type: :file, multiple: true %>
+  </div>
+
+
+   <%= fields_for :real_estate_detail, @real_estate.real_estate_detail do |re_details_fields| %>
+    <div class="form-group">
+      <%= re_details_fields.label :Real_estate_size %>
+      <%= re_details_fields.text_field :size, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= re_details_fields.label :Condition %>
+      <%= re_details_fields.text_field :condition, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= re_details_fields.label :Note %>
+      <%= re_details_fields.text_field :note, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= re_details_fields.label :Address %>
+      <%= re_details_fields.text_field :address, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= re_details_fields.label :Description %>
+      <%= re_details_fields.text_field :description, :class => "form-control" %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :realEstateType %><br />
-    <%= f.text_field :realEstateType %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :realEstateName %><br />
-    <%= f.text_field :realEstateName %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <br/>
+  <br/>
+  <br/>
+
+  <div class="form-group">
+    <%= f.submit "Create real estate", class: "btn btn-large btn-primary" %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                real_estates_path, :class => 'btn btn-mini' %>
   </div>
 <% end %>

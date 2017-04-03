@@ -1,0 +1,16 @@
+<li>
+  <div class="gravatar">
+      <% images = real_estate.pictures %>
+      <% if images.empty? %>
+        <%= image_tag '/system/images/missing.png', height: 52 %>
+      <% else %>
+        <div><%= image_tag images.first.image.url(:original), width: 60 %></div>
+      <% end %>
+  </div>
+
+  <div>
+    <%= real_estate.realEstateName %>
+  </div>
+
+  <%= link_to "#{real_estate.realEstateName}", real_estate %>
+</li>

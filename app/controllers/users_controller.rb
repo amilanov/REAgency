@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update]
+  # before_filter :signed_in_user, only: [:index, :edit, :update]
   before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user, only: [:destroy]
-  before_filter :can_sign_up, only: [:new]
+  before_filter :admin_user
 
   # GET /users
   # GET /users.json
@@ -30,6 +29,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+    @user_roles = Role.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,23 +39,24 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user_roles = Role.all
   end
 
   # POST /users
   # POST /users.json
   def create
-    user = User.new(params[:user])
+    @user = User.new(params[:user])
+    @user_roles = Role.all
 
     respond_to do |format|
-      if user.save
-        user.assign_role('user')
-        sign_in user
+      if @user.save
+        sign_in @user
         flash[:success] = 'User was successfully created.'
-        format.html { redirect_to user }
-        format.json { render json: user, status: :created, location: user }
+        format.html { redirect_to @user }
+        format.json { render json: @user, status: :created, location: @user }
       else
         format.html { render action: 'new' }
-        format.json { render json: user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    @user_roles = Role.all
     respond_to do |format|
       if @user.update_attributes(params[:user])
         sign_in @user
@@ -95,14 +97,9 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    redirect_to root_path unless current_user.admin?
-  end
-
-  def can_sign_up
     if signed_in?
-      admin_user
-    else
-      true
+      return true if current_user.admin?
     end
+    redirect_to root_path
   end
 end

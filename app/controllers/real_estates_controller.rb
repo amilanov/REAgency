@@ -1,8 +1,9 @@
 class RealEstatesController < ApplicationController
+  before_filter :can_create_re, :except => [:index, :show]
   # GET /real_estates
   # GET /real_estates.json
   def index
-    @real_estates = RealEstate.all
+    @real_estates = RealEstate.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class RealEstatesController < ApplicationController
   # GET /real_estates/1.json
   def show
     @real_estate = RealEstate.find(params[:id])
+    @images      = @real_estate.pictures
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,8 @@ class RealEstatesController < ApplicationController
   # GET /real_estates/new.json
   def new
     @real_estate = RealEstate.new
+    @cities      = City.all
+    @re_types    = RealEstateType.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,15 +39,27 @@ class RealEstatesController < ApplicationController
   # GET /real_estates/1/edit
   def edit
     @real_estate = RealEstate.find(params[:id])
+    @cities      = City.all
+    @re_types    = RealEstateType.all
   end
 
   # POST /real_estates
   # POST /real_estates.json
   def create
-    @real_estate = RealEstate.new(params[:real_estate])
+    @real_estate = current_user.real_estates.build(params[:real_estate])
+    @cities      = City.all
+    @re_types    = RealEstateType.all
 
     respond_to do |format|
       if @real_estate.save
+        if params[:images]
+          params[:images].each { |image|
+            @real_estate.pictures.create(image: image)
+          }
+        end
+        if re_detail = params[:real_estate_detail]
+          @real_estate.create_real_estate_detail(re_detail)
+        end
         format.html { redirect_to @real_estate, notice: 'Real estate was successfully created.' }
         format.json { render json: @real_estate, status: :created, location: @real_estate }
       else
@@ -60,6 +76,11 @@ class RealEstatesController < ApplicationController
 
     respond_to do |format|
       if @real_estate.update_attributes(params[:real_estate])
+        if params[:images]
+          params[:images].each { |image|
+            @real_estate.pictures.create(image: image)
+          }
+        end
         format.html { redirect_to @real_estate, notice: 'Real estate was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +100,11 @@ class RealEstatesController < ApplicationController
       format.html { redirect_to real_estates_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def can_create_re
+    redirect_to root_path unless current_user && current_user.can_create_real_estate?
   end
 end

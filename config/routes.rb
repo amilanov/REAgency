@@ -1,7 +1,7 @@
 REAgency::Application.routes.draw do
   resources :roles
 
-
+  resources :real_estate_types
   resources :real_estate_details
   resources :tasks
   resources :reports

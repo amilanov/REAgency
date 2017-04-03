@@ -14,13 +14,13 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :username, :password, :password_confirmation, :firstName, :lastName, :address, :avatar
+  attr_accessible :name, :email, :username, :password, :password_confirmation, :firstName, :lastName, :address, :avatar, :role_ids
   has_secure_password
 
   belongs_to :city
-  has_many :user_roles, dependent: :destroy
-  has_many :roles, through: :user_roles
+  has_and_belongs_to_many :roles
   has_many :activities
+  has_many :real_estates
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -39,8 +39,8 @@ class User < ActiveRecord::Base
   def admin?
     is_admin = false
 
-    user_roles.each do |ur|
-      is_admin = true if ur.role[:roleName].eql?('admin')
+    roles.each do |role|
+      is_admin = true if role[:roleName].eql?('admin')
     end
 
     is_admin
@@ -49,6 +49,13 @@ class User < ActiveRecord::Base
   def assign_role(role_name)
     role = Role.get_role(role_name)
     user_roles.create!(role: role)
+  end
+
+  def can_create_real_estate?
+    roles.each do |role|
+      role_name = role.roleName
+      return true if role_name.eql?('admin') || role_name.eql?('user') || role_name.eql?('manager') || role_name.eql?('main manager')
+    end
   end
 
   private

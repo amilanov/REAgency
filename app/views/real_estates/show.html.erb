@@ -1,25 +1,39 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Realestatetype:</b>
-  <%= @real_estate.realEstateType %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @real_estate.address %>
-</p>
-
-<p>
-  <b>Realestatename:</b>
+  <b>Real estate name:</b>
   <%= @real_estate.realEstateName %>
 </p>
 
-<p>
-  <b>Description:</b>
-  <%= @real_estate.description %>
-</p>
+<div class="galleria">
+  <% if @images.empty? %>
+    <%= image_tag '/system/images/missing.png', height: 500 %>
+  <% else %>
+    <% @images.each do |image| %>
+      <%= image_tag image.image.url(:original), height: 500 %>
+    <% end %>
+  <% end %>
+</div>
 
+<% if current_user && current_user.can_create_real_estate? %>
+  <%= link_to 'Edit', edit_real_estate_path(@real_estate) %> |
+<% end %>
 
-<%= link_to 'Edit', edit_real_estate_path(@real_estate) %> |
 <%= link_to 'Back', real_estates_path %>
+
+<%= javascript_include_tag('/galleria/galleria-1.5.5.min.js') %>
+<%= javascript_tag do %>
+  (function() { 
+    Galleria.loadTheme('/galleria/themes/classic/galleria.classic.min.js');
+    Galleria.configure({
+      <!-- imageCrop: true, -->
+      transition: 'fade',
+      log: true,
+      // better handle image paths in assets folder!
+      assets: true,
+      // if pic can't be loaded use this one as fallback
+      dummy: '/assets/images/missing.png'
+    });  
+    Galleria.run('.galleria');
+  }());
+<% end %>

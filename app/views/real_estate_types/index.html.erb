@@ -1,0 +1,23 @@
+<h1>Listing real_estate_types</h1>
+
+<table>
+  <tr>
+    <th>Realestatetype</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @real_estate_types.each do |real_estate_type| %>
+  <tr>
+    <td><%= real_estate_type.realEstateType %></td>
+    <td><%= link_to 'Show', real_estate_type %></td>
+    <td><%= link_to 'Edit', edit_real_estate_type_path(real_estate_type) %></td>
+    <td><%= link_to 'Destroy', real_estate_type, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Real estate type', new_real_estate_type_path %>

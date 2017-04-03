@@ -14,5 +14,7 @@
 #
 
 class RealEstateDetail < ActiveRecord::Base
+  belongs_to :real_estate
+  attr_accessible :size, :condition, :note, :address, :description
   validates :real_estate_id, presence: true
 end

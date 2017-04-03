@@ -13,5 +13,14 @@
 
 class RealEstate < ActiveRecord::Base
   belongs_to :city
+  belongs_to :user
+  belongs_to :real_estate_type
+  has_one    :real_estate_detail
+  accepts_nested_attributes_for :real_estate_detail, allow_destroy: true
+  has_many   :pictures, :dependent => :destroy
+
   validates :realEstateName, presence: true
+  validates :city_id, presence: true
+  validates :user_id, presence: true
+  validates :real_estate_type_id, presence: true
 end

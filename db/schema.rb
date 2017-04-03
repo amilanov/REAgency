@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170314204515) do
+ActiveRecord::Schema.define(:version => 20170402235320) do
 
   create_table "activities", :force => true do |t|
     t.string   "activityName"
@@ -58,25 +58,47 @@ ActiveRecord::Schema.define(:version => 20170314204515) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "pictures", :force => true do |t|
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "real_estate_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "pictures", ["real_estate_id"], :name => "index_pictures_on_real_estate_id"
+
   create_table "real_estate_details", :force => true do |t|
     t.string   "size"
-    t.string   "images"
     t.string   "realEstateType"
     t.string   "condition"
     t.string   "note"
     t.integer  "real_estate_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "address"
+    t.string   "description"
   end
 
-  create_table "real_estates", :force => true do |t|
+  create_table "real_estate_types", :force => true do |t|
     t.string   "realEstateType"
-    t.string   "address"
-    t.string   "realEstateName"
-    t.string   "description"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  create_table "real_estates", :force => true do |t|
+    t.string   "realEstateName"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "city_id"
+    t.integer  "user_id"
+    t.integer  "real_estate_type_id"
+  end
+
+  add_index "real_estates", ["city_id"], :name => "index_real_estates_on_city_id"
+  add_index "real_estates", ["user_id"], :name => "index_real_estates_on_user_id"
 
   create_table "reports", :force => true do |t|
     t.string   "report"
@@ -89,6 +111,11 @@ ActiveRecord::Schema.define(:version => 20170314204515) do
     t.string   "roleName"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
   end
 
   create_table "saved_items", :force => true do |t|
@@ -117,13 +144,9 @@ ActiveRecord::Schema.define(:version => 20170314204515) do
     t.string   "address"
     t.string   "username"
     t.string   "password_digest"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "email"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.string   "remember_token"
   end
 
