@@ -1,5 +1,5 @@
 class RealEstatesController < ApplicationController
-  before_filter :can_create_re, :except => [:index, :show]
+  # before_filter :can_create_re, :except => [:index, :show]
   # GET /real_estates
   # GET /real_estates.json
   def index
@@ -99,6 +99,51 @@ class RealEstatesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to real_estates_url }
       format.json { head :no_content }
+    end
+  end
+
+  def apartments
+    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Stan'}).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def houses
+    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Kuća'}).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def garages
+    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Garaža'}).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def rooms
+    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Soba'}).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def others
+    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Balkon'}).paginate(page: params[:page])
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
     end
   end
 

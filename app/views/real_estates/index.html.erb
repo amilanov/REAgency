@@ -1,4 +1,4 @@
-<h1>Listing real_estates</h1>
+<h1>Lista nekretnina</h1>
 
 <div style="margin-left: 40px">
     <%= will_paginate @real_estates, previous_label: '←', next_label: '→', renderer: BootstrapPagination::Rails %>
@@ -14,7 +14,7 @@
 
 <% if current_user && current_user.can_create_real_estate? %>
   <div style="margin-left: 40px">
-    <%= link_to 'New Real Estate', new_real_estate_path %>
+    <%= link_to 'Nova nekretnina', new_real_estate_path %>
   </div>
 <% end %>
 

@@ -1,25 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Real estate name:</b>
-  <%= @real_estate.realEstateName %>
-</p>
+<hr/>
 
-<div class="galleria">
-  <% if @images.empty? %>
-    <%= image_tag '/system/images/missing.png', height: 500 %>
-  <% else %>
-    <% @images.each do |image| %>
-      <%= image_tag image.image.url(:original), height: 500 %>
+  <div class="col-md-3 col-md-offset-1">
+    <section>
+      <% if @images.empty? %>
+        <%= image_tag '/system/images/missing.png', height: 200 %>
+      <% else %>
+        <%= image_tag @images.first.image.url(:medium) %>
+      <% end %>
+    </section>
+    <br/>
+    <% if current_user && current_user.can_create_real_estate? %>
+      <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
     <% end %>
-  <% end %>
+    <%= link_to 'Nazad', real_estates_path %> |
+    <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
+  </aside>
 </div>
 
-<% if current_user && current_user.can_create_real_estate? %>
-  <%= link_to 'Edit', edit_real_estate_path(@real_estate) %> |
-<% end %>
+<div class="col-md-6 col-md-offset-1">
+  <section>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td><b>Naziv nekretnine:</b></td>
+        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
+      </tr>
+      <tr>
+        <td><b>Naziv nekretnine:</b></td>
+        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
+      </tr>
+      <tr>
+        <td><b>Naziv nekretnine:</b></td>
+        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
+      </tr>
+      <tr>
+        <td><b>Naziv nekretnine:</b></td>
+        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
+      </tr>
+      <tr>
+        <td><b>Naziv nekretnine:</b></td>
+        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
+      </tr>
+    </table>
+    </section>
+    <hr>
+</div>
 
-<%= link_to 'Back', real_estates_path %>
+<div class="col-md-10 col-md-offset-1">
+  <div class="galleria">
+    <% if @images.empty? %>
+      <%= image_tag '/system/images/missing.png', height: 500 %>
+    <% else %>
+      <% @images.each do |image| %>
+        <%= image_tag image.image.url(:original), height: 500 %>
+      <% end %>
+    <% end %>
+  </div>
+  <% if current_user && current_user.can_create_real_estate? %>
+    <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
+  <% end %>
+
+  <%= link_to 'Nazad', real_estates_path %>
+  <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
+</div>
+
+
 
 <%= javascript_include_tag('/galleria/galleria-1.5.5.min.js') %>
 <%= javascript_tag do %>

@@ -1,29 +1,18 @@
 REAgency::Application.routes.draw do
+  resources :saved_real_estates
   resources :roles
-
   resources :real_estate_types
   resources :real_estate_details
   resources :tasks
   resources :reports
-
   resources :contracts
-
   resources :offices
-
   resources :cities
-
   resources :real_estates
-
-  resources :saved_items
-
   resources :items
-
   resources :user_roles
-
   resources :activities
-
   resources :users
-
   resources :countries
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -35,6 +24,14 @@ REAgency::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+  match '/save_real_estate', to: 'saved_real_estates#create'
+  match '/apartments', to: 'real_estates#apartments'
+  match '/houses', to: 'real_estates#houses'
+  match '/garages', to: 'real_estates#garages'
+  match '/rooms', to: 'real_estates#rooms'
+  match '/others', to: 'real_estates#others'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

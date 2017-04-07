@@ -1,20 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Tasktext:</b>
+  <b>Tekst zadatka:</b>
   <%= @task.taskText %>
 </p>
 
 <p>
-  <b>Taskdate:</b>
+  <b>Datum:</b>
   <%= @task.taskDate %>
 </p>
 
 <p>
-  <b>Taskduration:</b>
+  <b>Trajanje:</b>
   <%= @task.taskDuration %>
 </p>
 
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<%= link_to 'Uredi', edit_task_path(@task) %> |
+<%= link_to 'Nazad', tasks_path %>

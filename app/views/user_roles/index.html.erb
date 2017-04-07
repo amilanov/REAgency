@@ -1,8 +1,8 @@
-<h1>Listing user_roles</h1>
+<h1>Korisničke role</h1>
 
 <table>
   <tr>
-    <th>Rolename</th>
+    <th>Naziv role</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +11,13 @@
 <% @user_roles.each do |user_role| %>
   <tr>
     <td><%= user_role.roleName %></td>
-    <td><%= link_to 'Show', user_role %></td>
-    <td><%= link_to 'Edit', edit_user_role_path(user_role) %></td>
-    <td><%= link_to 'Destroy', user_role, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detalji', user_role %></td>
+    <td><%= link_to 'Uredi', edit_user_role_path(user_role) %></td>
+    <td><%= link_to 'Obriši', user_role, confirm: 'Da li ste sigurni?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New User role', new_user_role_path %>
+<%= link_to 'Nova korisnička rola', new_user_role_path %>

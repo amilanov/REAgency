@@ -1,10 +1,13 @@
-<h1>Listing activities</h1>
+<h1>Aktivnosti</h1>
 
+<%= link_to 'Nova aktivnost', new_activity_path, class: "btn btn-large btn-primary" %>
+<br/>
+<br/>
 <table>
   <tr>
-    <th>Activityname</th>
-    <th>Startdate</th>
-    <th>Enddate</th>
+    <th>Naziv aktivnosti</th>
+    <th>Datum početka</th>
+    <th>Datum završetka</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,13 +18,11 @@
     <td><%= activity.activityName %></td>
     <td><%= activity.startDate %></td>
     <td><%= activity.endDate %></td>
-    <td><%= link_to 'Show', activity %></td>
-    <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-    <td><%= link_to 'Destroy', activity, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detalji', activity %></td>
+    <td><%= link_to 'Uredi', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Obriši', activity, confirm: 'Da li ste sigurni?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Activity', new_activity_path %>

@@ -1,13 +1,13 @@
-<h1>Listing real_estate_details</h1>
+<h1>Lista detalja</h1>
 
 <table>
   <tr>
-    <th>Size</th>
-    <th>Images</th>
-    <th>Realestatetype</th>
-    <th>Condition</th>
-    <th>Note</th>
-    <th>Real estate</th>
+    <th>Veličina</th>
+    <th>Slike</th>
+    <th>Tip</th>
+    <th>Stanje</th>
+    <th>Napomena</th>
+    <th>Nekretnina</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,13 +21,13 @@
     <td><%= real_estate_detail.condition %></td>
     <td><%= real_estate_detail.note %></td>
     <td><%= real_estate_detail.real_estate_id %></td>
-    <td><%= link_to 'Show', real_estate_detail %></td>
-    <td><%= link_to 'Edit', edit_real_estate_detail_path(real_estate_detail) %></td>
-    <td><%= link_to 'Destroy', real_estate_detail, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detalji', real_estate_detail %></td>
+    <td><%= link_to 'Uredi', edit_real_estate_detail_path(real_estate_detail) %></td>
+    <td><%= link_to 'Obriši', real_estate_detail, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Real estate detail', new_real_estate_detail_path %>
+<%= link_to 'Novi detalji', new_real_estate_detail_path %>

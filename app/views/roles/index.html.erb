@@ -1,8 +1,8 @@
-<h1>Listing roles</h1>
+<h1>Korisničke role</h1>
 
 <table>
   <tr>
-    <th>Rolename</th>
+    <th>Naziv role</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +11,13 @@
 <% @roles.each do |role| %>
   <tr>
     <td><%= role.roleName %></td>
-    <td><%= link_to 'Show', role %></td>
-    <td><%= link_to 'Edit', edit_role_path(role) %></td>
-    <td><%= link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Detalji', role %></td>
+    <td><%= link_to 'Uredi', edit_role_path(role) %></td>
+    <td><%= link_to 'Obriši', role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Role', new_role_path %>
+<%= link_to 'Nova rola', new_role_path %>

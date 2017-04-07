@@ -1,0 +1,22 @@
+<h1>Snimljene nekretnine</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @saved_real_estates.each do |saved_real_estate| %>
+  <tr>
+    <td><%= saved_real_estate.id %></td>
+    <td><%= link_to 'Detalji', saved_real_estate %></td>
+    <td><%= link_to 'Uredi', edit_saved_real_estate_path(saved_real_estate) %></td>
+    <td><%= link_to 'Obriši', saved_real_estate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<!-- <%= link_to 'New Saved real estate', new_saved_real_estate_path %> -->

@@ -1,7 +1,7 @@
 <%= form_for(@role) do |f| %>
   <% if @role.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+      <h2>Nije moguće kreirati korisničku rolu zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @role.errors.full_messages.each do |msg| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :roleName %><br />
+    <%= f.label :Naziv_role %><br />
     <%= f.text_field :roleName %>
   </div>
   <div class="actions">

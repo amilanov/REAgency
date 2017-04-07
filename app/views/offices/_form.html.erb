@@ -1,7 +1,7 @@
 <%= form_for(@office) do |f| %>
   <% if @office.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@office.errors.count, "error") %> prohibited this office from being saved:</h2>
+      <h2>Nije moguće kreirati poslovnicu zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @office.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :officeName %><br />
+    <%= f.label :Naziv poslovnice %><br />
     <%= f.text_field :officeName %>
   </div>
   <div class="field">
-    <%= f.label :address %><br />
+    <%= f.label :Adresa %><br />
     <%= f.text_field :address %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :Telefon %><br />
     <%= f.text_field :phone %>
   </div>
   <div class="actions">

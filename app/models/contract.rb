@@ -11,5 +11,8 @@
 #
 
 class Contract < ActiveRecord::Base
+  attr_accessible :contractType
+
+  has_many  :documents, :dependent => :destroy
   validates :contractType, presence: true
 end

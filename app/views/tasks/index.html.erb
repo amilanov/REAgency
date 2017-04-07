@@ -1,10 +1,10 @@
-<h1>Listing tasks</h1>
+<h1>Taskovi</h1>
 
 <table>
   <tr>
-    <th>Tasktext</th>
-    <th>Taskdate</th>
-    <th>Taskduration</th>
+    <th>Tekst zadatka</th>
+    <th>Datum</th>
+    <th>Trajanje</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,13 +15,13 @@
     <td><%= task.taskText %></td>
     <td><%= task.taskDate %></td>
     <td><%= task.taskDuration %></td>
-    <td><%= link_to 'Show', task %></td>
-    <td><%= link_to 'Edit', edit_task_path(task) %></td>
-    <td><%= link_to 'Destroy', task, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detalji', task %></td>
+    <td><%= link_to 'Uredi', edit_task_path(task) %></td>
+    <td><%= link_to 'Obriši', task, confirm: 'Da li ste sigurni?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'Novi zadatak', new_task_path %>

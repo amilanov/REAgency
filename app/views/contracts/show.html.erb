@@ -1,10 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Contracttype:</b>
+  <b>Tip_ugovora:</b>
   <%= @contract.contractType %>
 </p>
 
+<% if @documents.empty? %>
+    <%= link_to '/system/images/missing.png', height: 500 %>
+  <% else %>
+    <% @documents.each do |image| %>
+      <%= link_to image.file.url(:original), height: 500 %>
+    <% end %>
+  <% end %>
 
-<%= link_to 'Edit', edit_contract_path(@contract) %> |
-<%= link_to 'Back', contracts_path %>
+<br/>
+<br/>
+<%= link_to 'Uredi', edit_contract_path(@contract) %> |
+<%= link_to 'Nazad', contracts_path %>

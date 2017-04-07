@@ -1,16 +1,23 @@
 <li>
-  <div class="gravatar">
+<div class="col-md-2 col-md-offset-0">
+  <div class="gravatar" style="width: 100%; height: 100%;">
       <% images = real_estate.pictures %>
       <% if images.empty? %>
-        <%= image_tag '/system/images/missing.png', height: 52 %>
+        <div><%= image_tag '/system/images/missing.png', height: 90 %></div>
       <% else %>
-        <div><%= image_tag images.first.image.url(:original), width: 60 %></div>
+        <div><%= image_tag images.first.image.url(:original), width: 90 %></div>
       <% end %>
   </div>
-
+</div>
+<div class="col-md-2 col-md-offset-0.5">
   <div>
     <%= real_estate.realEstateName %>
   </div>
 
-  <%= link_to "#{real_estate.realEstateName}", real_estate %>
+  <div>
+    <%= link_to "Snimi!", save_real_estate_path(:id => real_estate.id) %>
+  </div>
+
+  <div><%= link_to "#{real_estate.realEstateName}", real_estate %></div>
+  </div>
 </li>

@@ -1,7 +1,7 @@
 <%= form_for(@activity) do |f| %>
   <% if @activity.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+      <h2>Nije moguće kreirati aktivnost zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @activity.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :activityName %><br />
+    <%= f.label :Naziv_aktivnosti %><br />
     <%= f.text_field :activityName %>
   </div>
   <div class="field">
-    <%= f.label :startDate %><br />
+    <%= f.label :Datum_početka %><br />
     <%= f.datetime_select :startDate %>
   </div>
   <div class="field">
-    <%= f.label :endDate %><br />
+    <%= f.label :Datum_završetka %><br />
     <%= f.datetime_select :endDate %>
   </div>
   <div class="actions">

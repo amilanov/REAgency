@@ -1,7 +1,7 @@
-<%= form_for(@contract) do |f| %>
+<%= form_for(@contract, :html => { :class => "form-horizontal", multipart: true }) do |f| %>
   <% if @contract.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+      <h2>Nije moguće kreirati ugovor zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @contract.errors.full_messages.each do |msg| %>
@@ -12,9 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :contractType %><br />
+    <%= f.label :Tip_ugovora %><br />
     <%= f.text_field :contractType %>
   </div>
+
+  <div class="form-group">
+    <span style="margin-left: 1px">
+      <%= f.label :Dokumenti %>
+    </span>
+    <br/>
+    <%= file_field_tag "documents[]", type: :file, multiple: true %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

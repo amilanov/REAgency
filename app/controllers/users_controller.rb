@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   # before_filter :signed_in_user, only: [:index, :edit, :update]
   before_filter :correct_user, only: [:edit, :update]
-  before_filter :admin_user
+  before_filter :admin_user, only: [:index, :new, :create, :destroy]
+  before_filter :can_show, only: [:show]
 
   # GET /users
   # GET /users.json
@@ -17,7 +18,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user       = User.find(params[:id])
+    @roles      = @user.roles
+    @role_names = @roles.map{|role| role.roleName}
 
     respond_to do |format|
       format.html # show.html.erb
@@ -50,7 +53,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        sign_in @user
+        # sign_in @user
         flash[:success] = 'User was successfully created.'
         format.html { redirect_to @user }
         format.json { render json: @user, status: :created, location: @user }
@@ -101,5 +104,18 @@ class UsersController < ApplicationController
       return true if current_user.admin?
     end
     redirect_to root_path
+  end
+
+  def can_show
+    can_show = false
+
+    correct = current_user?(User.find(params[:id]))
+    if signed_in?
+      can_show = true if current_user.admin?
+    end
+
+    unless can_show
+      redirect_to root_path unless correct
+    end
   end
 end

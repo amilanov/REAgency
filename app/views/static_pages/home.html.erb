@@ -1,9 +1,21 @@
 <div class="center hero-unit">
-  <h1>Welcome to the Sample App</h1>
-  <h2>
-    This is the home page for the
-    <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  <div class="col-md-8 col-sm-6 col-xs-4 coverImage">  
+  </div>
+  <h3>Nekretnine</h3>
+  <hr>
+  <% @featured_products.each do |fp| %>
+    <% images = fp.pictures %>
+    <% if images.empty? %>
+      <div class="image_home">
+        <image src="/system/images/missing.png" class="image_home_exist"/>
+        <div class="re_name_home"><%= link_to "#{fp.realEstateName}", fp %></div>
+      </div>
+      
+      <% else %>
+      <div class="image_home">
+        <%= image_tag images.first.image.url(:medium), class: "image_home_exist" %>
+        <div class="re_name_home"><%= link_to "#{fp.realEstateName}", fp %></div>
+      </div>
+    <% end %>
+  <% end %>
 </div>

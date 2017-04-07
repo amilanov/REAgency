@@ -14,6 +14,7 @@ class ContractsController < ApplicationController
   # GET /contracts/1.json
   def show
     @contract = Contract.find(params[:id])
+    @documents = @contract.documents
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,7 @@ class ContractsController < ApplicationController
   # GET /contracts/new.json
   def new
     @contract = Contract.new
+    @documents = @contract.documents
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,9 +43,14 @@ class ContractsController < ApplicationController
   # POST /contracts.json
   def create
     @contract = Contract.new(params[:contract])
-
     respond_to do |format|
       if @contract.save
+        if documents = params[:documents]
+          documents.each do |document|
+            doc = Document.new(file: document, contract_id: @contract.id)
+            doc.save!
+          end
+        end
         format.html { redirect_to @contract, notice: 'Contract was successfully created.' }
         format.json { render json: @contract, status: :created, location: @contract }
       else

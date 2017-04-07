@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :activities
   has_many :real_estates
+  has_many :saved_real_estates
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
@@ -44,6 +45,26 @@ class User < ActiveRecord::Base
     end
 
     is_admin
+  end
+
+  def manager?
+    is_manager = false
+
+    roles.each do |role|
+      is_manager = true if role[:roleName].eql?('manager')
+    end
+
+    is_manager
+  end
+
+  def user?
+    is_user = false
+
+    roles.each do |role|
+      is_user = true if role[:roleName].eql?('user')
+    end
+
+    is_user
   end
 
   def assign_role(role_name)

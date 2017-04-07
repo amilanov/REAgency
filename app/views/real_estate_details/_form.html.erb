@@ -1,7 +1,7 @@
 <%= form_for(@real_estate_detail) do |f| %>
   <% if @real_estate_detail.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@real_estate_detail.errors.count, "error") %> prohibited this real_estate_detail from being saved:</h2>
+      <h2>Nije moguće dodati detalje zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @real_estate_detail.errors.full_messages.each do |msg| %>
@@ -12,23 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :size %><br />
+    <%= f.label :Veličina %><br />
     <%= f.text_field :size %>
   </div>
   <div class="field">
-    <%= f.label :images %><br />
+    <%= f.label :Slike %><br />
     <%= f.text_field :images %>
   </div>
   <div class="field">
-    <%= f.label :realEstateType %><br />
+    <%= f.label :Tip_nekretnine %><br />
     <%= f.text_field :realEstateType %>
   </div>
   <div class="field">
-    <%= f.label :condition %><br />
+    <%= f.label :Stanje %><br />
     <%= f.text_field :condition %>
   </div>
   <div class="field">
-    <%= f.label :note %><br />
+    <%= f.label :Napomena %><br />
     <%= f.text_field :note %>
   </div>
   <div class="field">

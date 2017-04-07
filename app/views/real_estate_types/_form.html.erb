@@ -1,7 +1,7 @@
 <%= form_for(@real_estate_type) do |f| %>
   <% if @real_estate_type.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@real_estate_type.errors.count, "error") %> prohibited this real_estate_type from being saved:</h2>
+      <h2>Nije moguće kreirati tip nekretnine zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @real_estate_type.errors.full_messages.each do |msg| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :realEstateType %><br />
+    <%= f.label :Tip_nekretnine %><br />
     <%= f.text_field :realEstateType %>
   </div>
 

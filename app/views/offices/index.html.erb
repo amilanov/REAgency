@@ -1,10 +1,10 @@
-<h1>Listing offices</h1>
+<h1>Poslovnice</h1>
 
 <table>
   <tr>
-    <th>Officename</th>
-    <th>Address</th>
-    <th>Phone</th>
+    <th>Naziv poslovnice</th>
+    <th>Adresa</th>
+    <th>Telefon</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,13 +15,13 @@
     <td><%= office.officeName %></td>
     <td><%= office.address %></td>
     <td><%= office.phone %></td>
-    <td><%= link_to 'Show', office %></td>
-    <td><%= link_to 'Edit', edit_office_path(office) %></td>
-    <td><%= link_to 'Destroy', office, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Detalji', office %></td>
+    <td><%= link_to 'Uredi', edit_office_path(office) %></td>
+    <td><%= link_to 'Obriši', office, confirm: 'Da li ste sigurni?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Office', new_office_path %>
+<%= link_to 'Nova poslovnica', new_office_path %>

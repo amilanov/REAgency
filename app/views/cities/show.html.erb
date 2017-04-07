@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Cityname:</b>
+  <b>Naziv grada:</b>
   <%= @city.cityName %>
 </p>
 
 <p>
-  <b>Postalcode:</b>
+  <b>Poštanski broj:</b>
   <%= @city.postalCode %>
 </p>
 
 
-<%= link_to 'Edit', edit_city_path(@city) %> |
-<%= link_to 'Back', cities_path %>
+<%= link_to 'Uredi', edit_city_path(@city) %> |
+<%= link_to 'Nazad', cities_path %>

@@ -1,7 +1,7 @@
 <%= form_for(@report) do |f| %>
   <% if @report.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
+      <h2>Nije moguće kreirati izvještaj zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @report.errors.full_messages.each do |msg| %>
@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :report %><br />
+    <%= f.label :Izvještaj %><br />
     <%= f.text_field :report %>
   </div>
   <div class="field">
-    <%= f.label :reportDate %><br />
+    <%= f.label :Datum %><br />
     <%= f.datetime_select :reportDate %>
   </div>
   <div class="actions">

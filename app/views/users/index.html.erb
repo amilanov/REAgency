@@ -1,8 +1,13 @@
-<h1>All users</h1>
+<h1>Korisnici</h1>
 
 <div style="margin-left: 40px">
     <%= will_paginate @users, previous_label: '←', next_label: '→', renderer: BootstrapPagination::Rails %>
 </div>
+
+<div style="margin-left: 40px">
+    <%= link_to 'Novi korisnik', new_user_path, class: "btn btn-large btn-primary" %>
+</div>
+<br/>
 
 <ul class="users">
     <%= render @users %>
@@ -10,8 +15,4 @@
 
 <div style="margin-left: 40px">
     <%= will_paginate @users, previous_label: '←', next_label: '→', renderer: BootstrapPagination::Rails %>
-</div>
-
-<div style="margin-left: 40px">
-    <%= link_to 'New User', new_user_path %>
 </div>

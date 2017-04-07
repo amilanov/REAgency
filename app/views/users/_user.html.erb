@@ -4,8 +4,8 @@
   </div>
   
   <%= link_to "#{user.firstName} #{user.lastName}", user %>
-  
+
   <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete, confirm: "Are you sure?" %>
+    | <%= link_to "Obriši", user, method: :delete, confirm: "Da li ste sigurni?" %>
   <% end %>
 </li>

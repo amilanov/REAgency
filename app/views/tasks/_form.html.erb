@@ -1,7 +1,7 @@
 <%= form_for(@task) do |f| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <h2>Nije moguće dodati zadatak zbog sljedećih grešaka:</h2>
 
       <ul>
       <% @task.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :taskText %><br />
+    <%= f.label :Tekst_zadatka %><br />
     <%= f.text_field :taskText %>
   </div>
   <div class="field">
-    <%= f.label :taskDate %><br />
+    <%= f.label :Datum %><br />
     <%= f.datetime_select :taskDate %>
   </div>
   <div class="field">
-    <%= f.label :taskDuration %><br />
+    <%= f.label :Trajanje %><br />
     <%= f.text_field :taskDuration %>
   </div>
   <div class="actions">

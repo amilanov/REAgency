@@ -1,0 +1,17 @@
+<%= form_for(@saved_real_estate) do |f| %>
+  <% if @saved_real_estate.errors.any? %>
+    <div id="error_explanation">
+      <h2>Nije moguće snimiti nekretninu zbog sljedećih grešaka:</h2>
+
+      <ul>
+      <% @saved_real_estate.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

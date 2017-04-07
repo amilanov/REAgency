@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
+    @featured_products = RealEstate.limit(8).order("RANDOM()")
   end
   
   def help

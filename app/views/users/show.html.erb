@@ -1,35 +1,44 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
 <div class="row">
-  <aside class="span4">
+<br/>
+<br/>
+  <div class="col-md-2 col-md-offset-2">
     <section>
-      <h1>
-        <%= image_tag @user.avatar.url(:thumb) %>
-        <%= @user.firstName %>
-      </h1>
+      <%= image_tag @user.avatar.url(:thumb), height: 100, width: 100 %>
     </section>
+    <br/>
+    <%= link_to 'Uredi', edit_user_path(@user) %> |
+    <%= link_to 'Nazad', users_path %>
   </aside>
 </div>
 
-<p>
-  <b>Firstname:</b>
-  <%= @user.firstName %>
-</p>
+  <div class="col-md-6 col-md-offset-2" style="margin-left: 0;">
+  <section>
+    <table style="width: 60%">
+      <tr>
+        <td><b>Ime:</b></td>
+        <td style="padding-bottom: 5px;"><%= @user.firstName %></td>
+      </tr>
+      <tr>
+        <td><b>Prezime:</b></td>
+        <td style="padding-bottom: 5px;"><%= @user.lastName %></td>
+      </tr>
+      <tr>
+        <td><b>Email:</b></td>
+        <td style="padding-bottom: 5px;"><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td><b>Korisničko ime:</b></td>
+        <td style="padding-bottom: 5px;"><%= @user.username %></td>
+      </tr>
+      <tr>
+        <td><b>Korisničke role:</b></td>
+        <td style="padding-bottom: 5px;"><%= @role_names.join(',') %></td>
+      </tr>
+    </table>
+    </section>
+    <hr>
+</div>
 
-<p>
-  <b>Lastname:</b>
-  <%= @user.lastName %>
-</p>
 
-<p>
-  <b>Address:</b>
-  <%= @user.address %>
-</p>
-
-<p>
-  <b>Username:</b>
-  <%= @user.username %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
