@@ -11,7 +11,10 @@
 #
 
 class Activity < ActiveRecord::Base
+  attr_accessible :activityName, :activityType, :for_user_id, :startDate, :endDate
+
   belongs_to :user
+  has_many   :documents, :dependent => :destroy
 
   validates :activityName, :startDate, presence: true
 end

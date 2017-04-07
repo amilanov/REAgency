@@ -1,53 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<hr/>
-
-  <div class="col-md-3 col-md-offset-1">
-    <section>
-      <% if @images.empty? %>
-        <%= image_tag '/system/images/missing.png', height: 200 %>
-      <% else %>
-        <%= image_tag @images.first.image.url(:medium) %>
-      <% end %>
-    </section>
-    <br/>
-    <% if current_user && current_user.can_create_real_estate? %>
-      <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
-    <% end %>
-    <%= link_to 'Nazad', real_estates_path %> |
-    <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
-  </aside>
-</div>
-
-<div class="col-md-6 col-md-offset-1">
+<div class="col-md-6 col-md-offset-0">
   <section>
-    <table style="width: 100%">
-      <tr style="border-bottom: 1px solid lightgray;">
-        <td><b>Naziv nekretnine:</b></td>
-        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
-      </tr>
-      <tr>
-        <td><b>Naziv nekretnine:</b></td>
-        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
-      </tr>
-      <tr>
-        <td><b>Naziv nekretnine:</b></td>
-        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
-      </tr>
-      <tr>
-        <td><b>Naziv nekretnine:</b></td>
-        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
-      </tr>
-      <tr>
-        <td><b>Naziv nekretnine:</b></td>
-        <td style="padding-bottom: 5px;"><%= @real_estate.realEstateName %></td>
-      </tr>
-    </table>
-    </section>
-    <hr>
-</div>
-
-<div class="col-md-10 col-md-offset-1">
   <div class="galleria">
     <% if @images.empty? %>
       <%= image_tag '/system/images/missing.png', height: 500 %>
@@ -63,8 +15,129 @@
 
   <%= link_to 'Nazad', real_estates_path %>
   <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
+  </section>
 </div>
 
+<div class="col-md-5 col-md-offset-1">
+  
+    <div style="padding-bottom: 15px; font-size: 20px; border-bottom: 1px solid lightgray;"><b><%= @real_estate.realEstateName %></b></div>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td style="padding-top: 15px; padding-bottom: 15px; font-size: 20px; width: 30%"><%= @details.price %> KM</td>
+        <td></td>
+      </tr>
+      <% if @real_estate.city.cityName %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Grad:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @real_estate.city.cityName %></td>
+        </tr>
+      <% end %>
+      <% if @details.address %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Adresa:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.address %></td>
+        </tr>
+      <% end %>
+      <% if @details.size %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Površina:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.size %> m2</td>
+        </tr>
+      <% end %>
+      <% if @details.floor %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Sprat:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.floor %></td>
+        </tr>
+      <% end %>
+      <% if @details.condition %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Stanje:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.condition %></td>
+        </tr>
+      <% end %>
+      <% if @details.description %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Opis:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.description %></td>
+        </tr>
+      <% end %>
+      <% if @details.note && !@details.note.empty? %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Napomena:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.note %></td>
+        </tr>
+      <% end %>
+      <% if @real_estate.real_estate_type.realEstateType %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Tip nekretnine:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @real_estate.real_estate_type.realEstateType %></td>
+        </tr>
+      <% end %>
+      <% if @details.num_of_rooms %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj soba:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_rooms %></td>
+        </tr>
+      <% end %>
+      <% if @details.num_of_balconies %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj balkona:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_balconies %></td>
+        </tr>
+      <% end %>
+      <% if @details.num_of_bathrooms %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj kupatila:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_bathrooms %></td>
+        </tr>
+      <% end %>
+      <% if @details.heating_system %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Grijanje:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.heating_system %></td>
+        </tr>
+      <% end %>
+      <% if @details.orientation %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Orijentacija:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.orientation %></td>
+        </tr>
+      <% end %>
+      <% if @details.windows %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Stolarija:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.windows %></td>
+        </tr>
+      <% end %>
+      <% if @details.year_of_manufacture %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Godina gradnje:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.year_of_manufacture %></td>
+        </tr>
+      <% end %>
+      <% if @details.aircondition %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Klima:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.aircondition %></td>
+        </tr>
+      <% end %>
+      <% if @details.elevator %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Lift:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.elevator %></td>
+        </tr>
+      <% end %>
+      <% if @details.pantry %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Ostava:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.pantry %></td>
+        </tr>
+      <% end %>
+    </table>
+    
+    <!-- <hr> -->
+</div>
 
 
 <%= javascript_include_tag('/galleria/galleria-1.5.5.min.js') %>

@@ -1,20 +1,39 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 col-md-offset-2">
+  <table style="width: 100%">
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Naziv aktivnosti:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @activity.activityName %></td>
+    </tr>
 
-<p>
-  <b>Naziv aktivnosti:</b>
-  <%= @activity.activityName %>
-</p>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Darum početka:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @activity.startDate %></td>
+    </tr>
 
-<p>
-  <b>Datum početka:</b>
-  <%= @activity.startDate %>
-</p>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Datum završetka:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @activity.endDate %></td>
+    </tr>
 
-<p>
-  <b>Datum završetka:</b>
-  <%= @activity.endDate %>
-</p>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Kreirao:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= "#{@activity.user.firstName} #{@activity.user.lastName}" %></td>
+    </tr>
 
+    <% unless @documents.empty? %>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Dokumenti:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;">
+      <% @documents.each do |image| %>
+        <% file_name = File.basename(image.file.url, File.extname(image.file.url)); %>
+        <%= link_to file_name, image.file.url %><br/>
+      <% end %>
+      </td>
+    </tr>
+    <% end %>
 
-<%= link_to 'Uredi', edit_activity_path(@activity) %> |
-<%= link_to 'Nazad', activities_path %>
+  </table>
+
+  <%= link_to 'Uredi', edit_activity_path(@activity) %> |
+  <%= link_to 'Nazad', activities_path %>
+</div>

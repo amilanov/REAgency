@@ -1,24 +1,28 @@
-<h1>Ugovori</h1>
-
-<%= link_to 'Novi ugovor', new_contract_path, class: "btn btn-large btn-primary" %>
-<br/>
-<br/>
-
-<table>
-  <tr>
-    <th>Tip ugovora</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @contracts.each do |contract| %>
-  <tr>
-    <td><%= contract.contractType %></td>
-    <td><%= link_to 'Detalji', contract %></td>
-    <td><%= link_to 'Uredi', edit_contract_path(contract) %></td>
-    <td><%= link_to 'Obriši', contract, confirm: 'Da li ste sigurni?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
+<div class="col-md-9 col-md-offset-2">
+    <h1>Ugovori</h1>
+    <%= link_to 'Novi ugovor', new_contract_path, class: "btn btn-large btn-primary" %>
+    <br/>
+    <br/>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td style=""><b>Naziv</b></td>
+        <td style=""><b>Tip ugovora</b></td>
+        <td style=""><b>Korisnik</b></td>
+        <td style=""><b>Početak</b></td>
+        <td style=""><b>Završetak</b></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @contracts.each do |contract| %>
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td><%= link_to "#{contract.contractName}", contract %></td>
+        <td><%= contract.contractType %></td>
+        <td><%= "#{contract.user.username}" %></td>
+        <td><%= contract.contactStart %></td>
+        <td><%= contract.contractEnd %></td>
+        <td><%= link_to 'Uredi', edit_contract_path(contract) %> |</td>
+        <td><%= link_to 'Obriši', contract, confirm: 'Da li ste sigurni?', method: :delete %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>

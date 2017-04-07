@@ -1,19 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-6 col-md-offset-2">
+  <table style="width: 100%">
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Naziv:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.contractName %></td>
+    </tr>
 
-<p>
-  <b>Tip_ugovora:</b>
-  <%= @contract.contractType %>
-</p>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Tip ugovora:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.contractType %></td>
+    </tr>
 
-<% if @documents.empty? %>
-    <%= link_to '/system/images/missing.png', height: 500 %>
-  <% else %>
-    <% @documents.each do |image| %>
-      <%= link_to image.file.url(:original), height: 500 %>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Nekretnina:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.real_estate.realEstateName %></td>
+    </tr>
+
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Korisnik:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;"><%= "#{@contract.user.firstName} #{@contract.user.lastName}" %></td>
+    </tr>
+
+    <% unless @documents.empty? %>
+    <tr style="border-bottom: 1px solid lightgray;">
+      <td><b>Dokumenti:</b></td>
+      <td style="padding-bottom: 10px; padding-top: 10px;">
+      <% @documents.each do |image| %>
+        <% file_name = File.basename(image.file.url, File.extname(image.file.url)); %>
+        <%= link_to file_name, image.file.url %><br/>
+      <% end %>
+      </td>
+    </tr>
     <% end %>
-  <% end %>
+  </table>
 
-<br/>
-<br/>
-<%= link_to 'Uredi', edit_contract_path(@contract) %> |
-<%= link_to 'Nazad', contracts_path %>
+  <%= link_to 'Uredi', edit_contract_path(@contract) %> |
+  <%= link_to 'Nazad', contracts_path %>
+</div>

@@ -1,29 +1,40 @@
-<%= form_for(@activity) do |f| %>
-  <% if @activity.errors.any? %>
-    <div id="error_explanation">
-      <h2>Nije moguće kreirati aktivnost zbog sljedećih grešaka:</h2>
+<%= form_for(@activity, :html => { :class => "form-horizontal", multipart: true }) do |f| %>
+  <%= render 'shared/error_messages', object: @activity %>
 
-      <ul>
-      <% @activity.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :Naziv_aktivnosti %><br/>
+    <%= f.text_field :activityName, :class => "form-control" %>
+  </div>
 
-  <div class="field">
-    <%= f.label :Naziv_aktivnosti %><br />
-    <%= f.text_field :activityName %>
+  <div class="form-group">
+    <%= f.label :Tip %><br/>
+    <%= f.text_field :activityType, :class => "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :Datum_početka %><br />
-    <%= f.datetime_select :startDate %>
+
+  <div class="form-group">
+    <%= f.label :Datum_početka %><br/>
+    <%= f.datetime_select :startDate, :class => "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :Datum_završetka %><br />
-    <%= f.datetime_select :endDate %>
+
+  <div class="form-group">
+    <%= f.label :Datum_završetka %><br/>
+    <%= f.datetime_select :endDate, :class => "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <%= f.label :Za_korisnika %>
+    <%= f.collection_select :for_user_id, @for_users, :id, :firstName, {:include_blank => 'Odaberite korisnika'}, {class: "form-control btn btn-primary dropdown-toggle"} %>
+  </div>
+
+  <div class="form-group">
+    <span style="margin-left: 1px">
+      <%= f.label :Dokumenti %>
+    </span>
+    <br/>
+    <%= file_field_tag "documents[]", type: :file, multiple: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Spasi", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

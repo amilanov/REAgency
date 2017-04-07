@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
+    @activities = current_user.activities
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +14,8 @@ class ActivitiesController < ApplicationController
   # GET /activities/1.json
   def show
     @activity = Activity.find(params[:id])
+    @documents = @activity.documents
+    @for_users = User.includes(:roles).where(roles: {roleName: 'user'})
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,8 @@ class ActivitiesController < ApplicationController
   # GET /activities/new.json
   def new
     @activity = Activity.new
+    @documents = @activity.documents
+    @for_users = User.includes(:roles).where(roles: {roleName: 'user'})
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,15 +39,24 @@ class ActivitiesController < ApplicationController
   # GET /activities/1/edit
   def edit
     @activity = Activity.find(params[:id])
+    @for_users = User.includes(:roles).where(roles: {roleName: 'user'})
+    @documents = @activity.documents
   end
 
   # POST /activities
   # POST /activities.json
   def create
-    @activity = Activity.new(params[:activity])
+    @activity = current_user.activities.build(params[:activity])
+    @for_users = User.includes(:roles).where(roles: {roleName: 'user'})
 
     respond_to do |format|
       if @activity.save
+        if documents = params[:documents]
+          documents.each do |document|
+            doc = Document.new(file: document, activity_id: @activity.id)
+            doc.save!
+          end
+        end
         format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
         format.json { render json: @activity, status: :created, location: @activity }
       else

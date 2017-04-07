@@ -11,8 +11,11 @@
 #
 
 class Contract < ActiveRecord::Base
-  attr_accessible :contractType
+  attr_accessible :contractType, :contactStart, :contractEnd, :contractName, :real_estate_id
 
-  has_many  :documents, :dependent => :destroy
-  validates :contractType, presence: true
+  has_many   :documents, :dependent => :destroy
+  belongs_to :user
+  belongs_to :real_estate
+  validates  :contractType, presence: true
+  validates  :real_estate_id, presence: true
 end

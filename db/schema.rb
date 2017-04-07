@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170404094553) do
+ActiveRecord::Schema.define(:version => 20170407194644) do
 
   create_table "activities", :force => true do |t|
     t.string   "activityName"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20170404094553) do
     t.datetime "endDate"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "activityType"
+    t.integer  "user_id"
+    t.integer  "for_user_id"
   end
 
   create_table "cities", :force => true do |t|
@@ -31,10 +34,13 @@ ActiveRecord::Schema.define(:version => 20170404094553) do
 
   create_table "contracts", :force => true do |t|
     t.string   "contractType"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.datetime "contactStart"
     t.datetime "contractEnd"
+    t.string   "contractName"
+    t.integer  "user_id"
+    t.integer  "real_estate_id"
   end
 
   create_table "countries", :force => true do |t|
@@ -52,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20170404094553) do
     t.datetime "file_updated_at"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "activity_id"
   end
 
   create_table "offices", :force => true do |t|
@@ -80,10 +87,22 @@ ActiveRecord::Schema.define(:version => 20170404094553) do
     t.string   "condition"
     t.string   "note"
     t.integer  "real_estate_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "address"
     t.string   "description"
+    t.string   "price"
+    t.string   "num_of_rooms"
+    t.string   "num_of_balconies"
+    t.string   "num_of_bathrooms"
+    t.string   "floor"
+    t.string   "heating_system"
+    t.string   "orientation"
+    t.string   "windows"
+    t.string   "year_of_manufacture"
+    t.string   "aircondition"
+    t.string   "elevator"
+    t.string   "pantry"
   end
 
   create_table "real_estate_types", :force => true do |t|
@@ -109,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20170404094553) do
     t.datetime "reportDate"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|

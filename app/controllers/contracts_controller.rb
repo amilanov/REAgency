@@ -2,7 +2,7 @@ class ContractsController < ApplicationController
   # GET /contracts
   # GET /contracts.json
   def index
-    @contracts = Contract.all
+    @contracts = current_user.contracts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +15,7 @@ class ContractsController < ApplicationController
   def show
     @contract = Contract.find(params[:id])
     @documents = @contract.documents
+    @real_estates = current_user.real_estates
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,6 +28,7 @@ class ContractsController < ApplicationController
   def new
     @contract = Contract.new
     @documents = @contract.documents
+    @real_estates = current_user.real_estates
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,12 +39,16 @@ class ContractsController < ApplicationController
   # GET /contracts/1/edit
   def edit
     @contract = Contract.find(params[:id])
+    @documents = @contract.documents
+    @real_estates = current_user.real_estates
   end
 
   # POST /contracts
   # POST /contracts.json
   def create
-    @contract = Contract.new(params[:contract])
+    @contract = current_user.contracts.build(params[:contract])
+    @real_estates = current_user.real_estates
+
     respond_to do |format|
       if @contract.save
         if documents = params[:documents]

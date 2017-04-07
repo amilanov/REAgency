@@ -53,7 +53,7 @@ Galleria.addTheme({
             this.$('iefix').css({
                 zIndex: 3,
                 position: 'absolute',
-                backgroundColor: this.hasVariation('light') ? '#fff' : '#000',
+                backgroundColor: this.hasVariation('light') ? '#fff' : '#fff',
                 opacity: 0.4,
                 top: 0
             });

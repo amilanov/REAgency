@@ -1,28 +1,28 @@
-<h1>Aktivnosti</h1>
-
-<%= link_to 'Nova aktivnost', new_activity_path, class: "btn btn-large btn-primary" %>
-<br/>
-<br/>
-<table>
-  <tr>
-    <th>Naziv aktivnosti</th>
-    <th>Datum početka</th>
-    <th>Datum završetka</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @activities.each do |activity| %>
-  <tr>
-    <td><%= activity.activityName %></td>
-    <td><%= activity.startDate %></td>
-    <td><%= activity.endDate %></td>
-    <td><%= link_to 'Detalji', activity %></td>
-    <td><%= link_to 'Uredi', edit_activity_path(activity) %></td>
-    <td><%= link_to 'Obriši', activity, confirm: 'Da li ste sigurni?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
+<div class="col-md-10 col-md-offset-1">
+    <h1>Aktivnosti</h1>
+    <%= link_to 'Nova aktivnost', new_activity_path, class: "btn btn-large btn-primary" %>
+    <br/>
+    <br/>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td style=""><b>Naziv aktivnosti</b></td>
+        <td style=""><b>Tip aktivnosti</b></td>
+        <td style=""><b>Kreirao</b></td>
+        <td style=""><b>Početak</b></td>
+        <td style=""><b>Završetak</b></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @activities.each do |activity| %>
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td><%= link_to "#{activity.activityName}", activity %></td>
+        <td><%= activity.activityType %></td>
+        <td><%= activity.user.username %></td>
+        <td><%= activity.startDate %></td>
+        <td><%= activity.endDate %></td>
+        <td><%= link_to 'Uredi', edit_activity_path(activity) %> |</td>
+        <td><%= link_to 'Obriši', activity, confirm: 'Da li ste sigurni?', method: :delete %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>

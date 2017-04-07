@@ -1,26 +1,26 @@
-<h1>Izvještaji</h1>
+<div class="col-md-9 col-md-offset-2">
+    <h1>Izvještaji</h1>
+    <%= link_to 'Novi izvještaj', new_report_path, class: "btn btn-large btn-primary" %>
+    <br/>
+    <br/>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td style=""><b>Naziv</b></td>
+        <td style=""><b>Korisnik</b></td>
+        <td style=""><b>Datum</b></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @reports.each do |report| %>
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td><%= link_to "#{report.report}", report %></td>
+        <td><%= "#{report.user.username}" %></td>
+        <td><%= report.created_at %></td>
+        <td><%= link_to 'Uredi', edit_report_path(report) %> |</td>
+        <td><%= link_to 'Obriši', report, confirm: 'Da li ste sigurni?', method: :delete %></td>
+      </tr>
+      <% end %>
+    </table>
+</div>
 
-<%= link_to 'Novi izvještaj', new_report_path, class: "btn btn-large btn-primary" %>
-<br/>
-<br/>
-
-<table>
-  <tr>
-    <th>Izvještaj</th>
-    <th>Datum</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @reports.each do |report| %>
-  <tr>
-    <td><%= report.report %></td>
-    <td><%= report.reportDate %></td>
-    <td><%= link_to 'Detalji', report %></td>
-    <td><%= link_to 'Uredi', edit_report_path(report) %></td>
-    <td><%= link_to 'Obriši', report, confirm: 'Da li ste sigurni?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
 

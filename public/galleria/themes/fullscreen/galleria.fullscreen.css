@@ -11,7 +11,7 @@
 #galleria-loader{height:1px!important}
 
 html,
-body { background: #000 }
+body { background: #fff }
 .galleria-theme-fullscreen {
     height: 100%;
     overflow: hidden;
@@ -19,7 +19,7 @@ body { background: #000 }
     top: 0;
     left: 0;
     width: 100%;
-    background: #000;
+    background: #fff;
     -webkit-font-smoothing: antialiased;
 }
 .galleria-theme-fullscreen img {
@@ -52,7 +52,7 @@ body { background: #000 }
     top: 0;
     height: 16px;
     width: 100px;
-    background: #000 url(up.gif) no-repeat 50% 5px;
+    background: #fff url(up.gif) no-repeat 50% 5px;
     cursor: pointer;
     -moz-border-radius-topleft: 4px;
     -moz-border-radius-topright: 4px;
@@ -82,11 +82,11 @@ body { background: #000 }
     background-image: url(down-neg.gif);
 }
 .galleria-theme-fullscreen .galleria-thumbnails {
-    background: #000;
+    background: #fff;
     overflow: hidden;
 }
 .galleria-theme-fullscreen .galleria-thumbnails-list {
-    background: #000;
+    background: #fff;
     padding-top: 5px;
     padding-bottom: 5px;
     overflow: hidden;
@@ -102,11 +102,11 @@ body { background: #000 }
     cursor: pointer;
     margin-right: 5px;
 }
-.galleria-theme-fullscreen .galleria-thumbnails .galleria-image img { background: #000 }
+.galleria-theme-fullscreen .galleria-thumbnails .galleria-image img { background: #fff }
 .galleria-theme-fullscreen .galleria-thumbnails .active { cursor: default }
 .galleria-theme-fullscreen .galleria-carousel .galleria-thumbnails-list {
-    border-left: 30px solid #000;
-    border-right: 30px solid #000;
+    border-left: 30px solid #fff;
+    border-right: 30px solid #fff;
 }
 .galleria-theme-fullscreen.light .galleria-carousel .galleria-thumbnails-list {
     border-color: #fff;
@@ -159,14 +159,14 @@ body { background: #000 }
     position: absolute;
     top: 0;
     width: 100%;
-    border-top: 2px solid #000;
+    border-top: 2px solid #fff;
     display: none;
     text-align: center;
     padding: 10px 0;
     background: rgba(0,0,0,.5);
     border-bottom:1px solid rgba(0,0,0,.1);
 }
-.galleria-theme-fullscreen.light .galleria-info{background:rgba(255,255,255,.5);color:#000;}
+.galleria-theme-fullscreen.light .galleria-info{background:rgba(255,255,255,.5);color:#fff;}
 .galleria-theme-fullscreen .galleria-info-text {
     width: 50%;
     margin: 0 auto;

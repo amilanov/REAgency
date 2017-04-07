@@ -10,5 +10,7 @@
 #
 
 class Report < ActiveRecord::Base
+  attr_accessible :report, :created_at
+  belongs_to :user
   validates :report, presence: true
 end

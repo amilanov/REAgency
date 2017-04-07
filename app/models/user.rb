@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :activities
   has_many :real_estates
   has_many :saved_real_estates
+  has_many :contracts
+  has_many :reports
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

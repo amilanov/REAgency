@@ -18,6 +18,7 @@ class RealEstate < ActiveRecord::Base
   has_one    :real_estate_detail
   accepts_nested_attributes_for :real_estate_detail, allow_destroy: true
   has_many   :pictures, :dependent => :destroy
+  has_many   :contract
 
   validates :realEstateName, presence: true
   validates :city_id, presence: true
