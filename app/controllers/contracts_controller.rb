@@ -73,6 +73,12 @@ class ContractsController < ApplicationController
 
     respond_to do |format|
       if @contract.update_attributes(params[:contract])
+        if documents = params[:documents]
+          documents.each do |document|
+            doc = Document.new(file: document, contract_id: @contract.id)
+            doc.save!
+          end
+        end
         format.html { redirect_to @contract, notice: 'Contract was successfully updated.' }
         format.json { head :no_content }
       else

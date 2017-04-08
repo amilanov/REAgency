@@ -1,4 +1,4 @@
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-6 col-md-offset-2">
     <h1>Izvještaji</h1>
     <%= link_to 'Novi izvještaj', new_report_path, class: "btn btn-large btn-primary" %>
     <br/>
@@ -6,20 +6,11 @@
     <table style="width: 100%">
       <tr style="border-bottom: 1px solid lightgray;">
         <td style=""><b>Naziv</b></td>
-        <td style=""><b>Korisnik</b></td>
-        <td style=""><b>Datum</b></td>
-        <td></td>
-        <td></td>
       </tr>
-      <% @reports.each do |report| %>
+
       <tr style="border-bottom: 1px solid lightgray;">
-        <td><%= link_to "#{report.report}", report %></td>
-        <td><%= "#{report.user.username}" %></td>
-        <td><%= report.created_at %></td>
-        <td><%= link_to 'Uredi', edit_report_path(report) %> |</td>
-        <td><%= link_to 'Obriši', report, confirm: 'Da li ste sigurni?', method: :delete %></td>
+        <td><%= link_to 'Broj nekretnina po mjesecima', monthly_articles_path %></td>
       </tr>
-      <% end %>
     </table>
 </div>
 

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <table style="width: 100%">
+      <% @months.each do |name, month| %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%">Mjesec: <%= name %></td>
+          <td></td>
+        </tr>
+        <% month.each do |m| %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to m.realEstateName, m %></td>
+          <td><%= m.created_at %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <div style="margin-top: 25px"><%= link_to 'Nazad', reports_path %></div>
+  </div>
+</div>

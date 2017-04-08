@@ -80,4 +80,34 @@ class ReportsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def monthly_articles
+    @real_estates = RealEstate.all
+    @months = {}
+    @real_estates.each do |re|
+      if month = re.created_at.strftime("%B")
+        (@months[month]||=[]) << re
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def real_estates_by_city
+    @real_estates = RealEstate.all
+    @months = {}
+    @real_estates.each do |re|
+      if month = re.created_at.strftime("%B")
+        (@months[month]||=[]) << re
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
 end

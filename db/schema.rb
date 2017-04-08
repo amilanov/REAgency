@@ -173,15 +173,14 @@ ActiveRecord::Schema.define(:version => 20170407194644) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.string   "email"
-    t.string   "remember_token"
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
-  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

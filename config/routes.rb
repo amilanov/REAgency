@@ -32,6 +32,8 @@ REAgency::Application.routes.draw do
   match '/rooms', to: 'real_estates#rooms'
   match '/others', to: 'real_estates#others'
 
+  match '/monthly_articles', to: 'reports#monthly_articles'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
