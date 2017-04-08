@@ -4,16 +4,18 @@
   <h3>Nekretnine</h3>
   <hr>
   <% @featured_products.each do |fp| %>
-    <% images = fp.pictures %>
-    <% if images.empty? %>
+    <% if images = fp.pictures %>
       <div class="image_home">
-        <image src="/system/images/missing.png" class="image_home_exist"/>
+        <% if images.first %>
+          <%= image_tag images.first.image.url(:medium), class: "image_home_exist" %>
+        <% else %>
+          <image src="/system/images/missing.png" class="image_home_exist"/>
+        <% end %>
         <div class="re_name_home"><%= link_to "#{fp.realEstateName}", fp %></div>
       </div>
-      
-      <% else %>
+    <% else %>
       <div class="image_home">
-        <%= image_tag images.first.image.url(:medium), class: "image_home_exist" %>
+        <image src="/system/images/missing.png" class="image_home_exist"/>
         <div class="re_name_home"><%= link_to "#{fp.realEstateName}", fp %></div>
       </div>
     <% end %>
