@@ -13,7 +13,8 @@
     <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
   <% end %>
 
-  <%= link_to 'Nazad', real_estates_path %>
+  <% back_to_param = @back_to || real_estates_path %>
+  <%= link_to 'Nazad', back_to_param %> |
   <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
   </section>
 </div>

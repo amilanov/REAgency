@@ -3,7 +3,6 @@ class SavedRealEstatesController < ApplicationController
   # GET /saved_real_estates
   # GET /saved_real_estates.json
   def index
-    # @saved_real_estates = SavedRealEstate.all
     @saved_real_estates = current_user.saved_real_estates
 
     respond_to do |format|

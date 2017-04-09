@@ -1,22 +1,26 @@
-<h1>Snimljene nekretnine</h1>
-
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @saved_real_estates.each do |saved_real_estate| %>
-  <tr>
-    <td><%= saved_real_estate.id %></td>
-    <td><%= link_to 'Detalji', saved_real_estate %></td>
-    <td><%= link_to 'Uredi', edit_saved_real_estate_path(saved_real_estate) %></td>
-    <td><%= link_to 'Obriši', saved_real_estate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<!-- <%= link_to 'New Saved real estate', new_saved_real_estate_path %> -->
+<div class="col-md-9 col-md-offset-2">
+    <h1>Snimljene nekretnine</h1>
+    <br/>
+    <br/>
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td style=""><b>Id</b></td>
+        <td style=""><b>Naziv</b></td>
+        <td style=""><b>Tip nekretnine</b></td>
+        <td style=""><b>Snimljeno</b></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @saved_real_estates.each do |saved_real_estate| %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <% ret_real_estate = saved_real_estate.ret_real_estate %>
+          <td><%= saved_real_estate.id %></td>
+          <td><%= ret_real_estate.realEstateName %></td>
+          <td><%= ret_real_estate.real_estate_type.realEstateType %></td>
+          <td><%= saved_real_estate.created_at %></td>
+          <td><%= link_to 'Detalji', real_estate_path(id: ret_real_estate, back_to: saved_real_estates_path) %></td>
+          <td><%= link_to 'Obriši', saved_real_estate, confirm: 'Da li ste sigurni?', method: :delete %></td>
+        </tr>
+      <% end %>
+    </table>
+</div>

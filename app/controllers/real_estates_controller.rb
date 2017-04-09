@@ -17,6 +17,7 @@ class RealEstatesController < ApplicationController
     @real_estate = RealEstate.find(params[:id])
     @images      = @real_estate.pictures
     @details     = @real_estate.real_estate_detail
+    @back_to     = params[:back_to]
 
     respond_to do |format|
       format.html # show.html.erb

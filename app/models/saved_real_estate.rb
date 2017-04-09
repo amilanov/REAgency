@@ -5,4 +5,8 @@ class SavedRealEstate < ActiveRecord::Base
 
   validates :real_estate_id, presence: true
   validates :user_id, presence: true
+
+  def ret_real_estate
+    RealEstate.where(id: real_estate_id).first
+  end
 end
