@@ -9,4 +9,9 @@ class SavedRealEstate < ActiveRecord::Base
   def ret_real_estate
     RealEstate.where(id: real_estate_id).first
   end
+
+  def self.saved?(current_user, re_id)
+    return false unless current_user
+    where(user_id: current_user.id, real_estate_id: re_id)
+  end
 end
