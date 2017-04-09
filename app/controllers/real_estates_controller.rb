@@ -113,7 +113,7 @@ class RealEstatesController < ApplicationController
     condition = { real_estate_types: {realEstateType: 'Stan'} }
     if real_estates_from_params = params["real_states"]
       if city_id = real_estates_from_params["city_id"]
-        condition.merge!(cities: {id: city_id})
+        condition.merge!(cities: {id: city_id}) unless city_id.empty?
       end
     end
     @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
@@ -128,7 +128,7 @@ class RealEstatesController < ApplicationController
     condition = { real_estate_types: {realEstateType: 'Kuća'} }
     if real_estates_from_params = params["real_states"]
       if city_id = real_estates_from_params["city_id"]
-        condition.merge!(cities: {id: city_id})
+        condition.merge!(cities: {id: city_id}) unless city_id.empty?
       end
     end
     @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
@@ -143,7 +143,7 @@ class RealEstatesController < ApplicationController
     condition = { real_estate_types: {realEstateType: 'Garaža'} }
     if real_estates_from_params = params["real_states"]
       if city_id = real_estates_from_params["city_id"]
-        condition.merge!(cities: {id: city_id})
+        condition.merge!(cities: {id: city_id}) unless city_id.empty?
       end
     end
     @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
@@ -158,7 +158,7 @@ class RealEstatesController < ApplicationController
     condition = { real_estate_types: {realEstateType: 'Soba'} }
     if real_estates_from_params = params["real_states"]
       if city_id = real_estates_from_params["city_id"]
-        condition.merge!(cities: {id: city_id})
+        condition.merge!(cities: {id: city_id}) unless city_id.empty?
       end
     end
     @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
