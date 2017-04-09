@@ -148,6 +148,14 @@ class RealEstatesController < ApplicationController
     end
   end
 
+  def contract_real_estates
+    @contract_real_estates = RealEstate.search(params[:search])
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
   private
 
   def can_create_re

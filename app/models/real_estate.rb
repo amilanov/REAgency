@@ -12,6 +12,8 @@
 #
 
 class RealEstate < ActiveRecord::Base
+  attr_accessible :realEstateName
+
   belongs_to :city
   belongs_to :user
   belongs_to :real_estate_type
@@ -24,4 +26,12 @@ class RealEstate < ActiveRecord::Base
   validates :city_id, presence: true
   validates :user_id, presence: true
   validates :real_estate_type_id, presence: true
+
+  def self.search(search)
+    if search
+      where("realEstateName LIKE ?", "%#{search}%")
+    else
+      all
+    end
+  end
 end
