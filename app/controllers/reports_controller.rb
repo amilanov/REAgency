@@ -113,4 +113,34 @@ class ReportsController < ApplicationController
       format.json { render json: @real_estates }
     end
   end
+
+  def number_of_real_estates_per_user
+    @real_estates = RealEstate.all
+    @display_user = false
+
+    if real_estates_from_params = params["real_states"]
+      if user_id = real_estates_from_params["user_id"]
+        unless user_id.empty?
+          @real_estates = RealEstate.where(user_id: user_id)
+          @username = User.where(id: user_id).first
+          @display_user = true
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def total_number_of_users
+    @users = User.all
+    @total = @users.size
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
 end
