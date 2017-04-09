@@ -11,6 +11,11 @@
   <br/>
 <% end %>
 
+ <%= form_for("real_states", :html => { :class => "form-horizontal"}) do |f| %>
+    <%= f.collection_select :city_id, City.all, :id, :cityName, {:include_blank => 'Odaberite grad'}, {class: "btn btn-primary dropdown-toggle"} %>
+    <%=  f.submit "Osvježi", class: "btn btn-large btn-primary"%>
+  <% end %>
+
 <ul class="users">
     <%= render @real_estates %>
 </ul>

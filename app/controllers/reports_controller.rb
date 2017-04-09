@@ -97,13 +97,12 @@ class ReportsController < ApplicationController
   end
 
   def real_estates_by_city
-    @real_estates = RealEstate.all
-    @months = {}
-    @real_estates.each do |re|
-      if month = re.created_at.strftime("%B")
-        (@months[month]||=[]) << re
+    @real_estates =
+      if city_id = 2#params[:city_id]
+        RealEstate.where(city_id: city_id)
+      else
+        RealEstate.all
       end
-    end
 
     respond_to do |format|
       format.html

@@ -3,6 +3,7 @@ class RealEstatesController < ApplicationController
   # GET /real_estates
   # GET /real_estates.json
   def index
+    byebug
     @real_estates = RealEstate.paginate(page: params[:page])
 
     respond_to do |format|
@@ -109,7 +110,13 @@ class RealEstatesController < ApplicationController
   end
 
   def apartments
-    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Stan'}).paginate(page: params[:page])
+    condition = { real_estate_types: {realEstateType: 'Stan'} }
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        condition.merge!(cities: {id: city_id})
+      end
+    end
+    @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
 
     respond_to do |format|
       format.html
@@ -118,7 +125,13 @@ class RealEstatesController < ApplicationController
   end
 
   def houses
-    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Kuća'}).paginate(page: params[:page])
+    condition = { real_estate_types: {realEstateType: 'Kuća'} }
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        condition.merge!(cities: {id: city_id})
+      end
+    end
+    @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
 
     respond_to do |format|
       format.html
@@ -127,7 +140,13 @@ class RealEstatesController < ApplicationController
   end
 
   def garages
-    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Garaža'}).paginate(page: params[:page])
+    condition = { real_estate_types: {realEstateType: 'Garaža'} }
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        condition.merge!(cities: {id: city_id})
+      end
+    end
+    @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
 
     respond_to do |format|
       format.html
@@ -136,7 +155,13 @@ class RealEstatesController < ApplicationController
   end
 
   def rooms
-    @real_estates = RealEstate.eager_load(:real_estate_type).where(real_estate_types: {realEstateType: 'Soba'}).paginate(page: params[:page])
+    condition = { real_estate_types: {realEstateType: 'Soba'} }
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        condition.merge!(cities: {id: city_id})
+      end
+    end
+    @real_estates = RealEstate.eager_load(:real_estate_type, :city).where(condition).paginate(page: params[:page])
 
     respond_to do |format|
       format.html

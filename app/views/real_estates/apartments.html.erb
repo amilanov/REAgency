@@ -4,12 +4,21 @@
     <%= will_paginate @real_estates, previous_label: '←', next_label: '→', renderer: BootstrapPagination::Rails %>
 </div>
 
-<% if current_user && current_user.can_create_real_estate? %>
+
   <div style="margin-left: 40px">
-    <%= link_to 'Nova nekretnina', new_real_estate_path(real_estate_type: 'Stan'), class: "btn btn-large btn-primary" %>
+    <% if current_user && current_user.can_create_real_estate? %>
+      <%= link_to 'Nova nekretnina', new_real_estate_path(real_estate_type: 'Stan'), class: "btn btn-large btn-primary" %>
+    <% end %>
+    <%= form_for("real_states", :html => { :class => "form-horizontal"}) do |f| %>
+      <%= f.collection_select :city_id, City.all, :id, :cityName, {:include_blank => 'Odaberite grad'}, {class: "btn btn-primary dropdown-toggle"} %>
+      <%=  f.submit "Osvježi", class: "btn btn-large btn-primary"%>
+    <% end %>
   </div>
-  <br/>
-<% end %>
+
+
+<div style="margin-left: 40px">
+  
+</div>
 
 <ul class="users">
     <%= render @real_estates %>

@@ -34,6 +34,7 @@ REAgency::Application.routes.draw do
 
   match '/monthly_articles', to: 'reports#monthly_articles'
   match '/contract_real_estates', to: 'real_estates#contract_real_estates'
+  match '/real_estates_by_city', to: 'reports#real_estates_by_city'
 
 
   # The priority is based upon order of creation:

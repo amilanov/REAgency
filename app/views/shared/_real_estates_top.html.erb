@@ -1,0 +1,4 @@
+<div class="form-group">
+  <%= label_tag :Grad %>
+  <%= collection_select(:post, :city_id, City.all, :id, :cityName, {:include_blank => 'Please Select'}, {id: "city_filter", class: "btn btn-primary dropdown-toggle"}) %>
+</div>

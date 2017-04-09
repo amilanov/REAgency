@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <table style="width: 100%">
+      <div style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%">Grad: <%= @real_estates.first.city.cityName %></div>
+      
+      <% @real_estates.each do |real_estate| %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%"><%= real_estate.realEstateName %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </table>
+    <div style="margin-top: 25px"><%= link_to 'Nazad', reports_path %></div>
+  </div>
+</div>
