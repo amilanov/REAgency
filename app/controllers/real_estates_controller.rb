@@ -32,6 +32,10 @@ class RealEstatesController < ApplicationController
     @cities      = City.all
     @re_types    = RealEstateType.all
 
+    if selected_type = params[:real_estate_type]
+      @selected_re_type = @re_types.find{ |re| re[:realEstateType] == selected_type }
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @real_estate }

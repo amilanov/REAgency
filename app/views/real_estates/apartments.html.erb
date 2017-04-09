@@ -6,7 +6,7 @@
 
 <% if current_user && current_user.can_create_real_estate? %>
   <div style="margin-left: 40px">
-    <%= link_to 'Nova nekretnina', new_real_estate_path, class: "btn btn-large btn-primary" %>
+    <%= link_to 'Nova nekretnina', new_real_estate_path(real_estate_type: 'Stan'), class: "btn btn-large btn-primary" %>
   </div>
   <br/>
 <% end %>

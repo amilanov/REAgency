@@ -22,7 +22,7 @@
     </span>
     <br/>
     <span>
-      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:include_blank => 'Please Select'} %>
+      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:selected => @selected_re_type ? @selected_re_type.id : nil, :include_blank => 'Please Select'} %>
     </span>
   </div>
 
