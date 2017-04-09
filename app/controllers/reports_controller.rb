@@ -97,12 +97,16 @@ class ReportsController < ApplicationController
   end
 
   def real_estates_by_city
-    @real_estates =
-      if city_id = 2#params[:city_id]
-        RealEstate.where(city_id: city_id)
-      else
-        RealEstate.all
+    @real_estates = RealEstate.all
+    @display_city = false
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        unless city_id.empty?
+          @real_estates = RealEstate.where(city_id: city_id)
+          @display_city = true
+        end
       end
+    end
 
     respond_to do |format|
       format.html

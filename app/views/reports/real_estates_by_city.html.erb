@@ -1,11 +1,24 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
+    <table style="width: 600px; margin-bottom: 10px;">
+      <tr>
+        <th>
+          <%= form_for("real_states", :html => { :class => "form-horizontal"}) do |f| %>
+              <%= f.collection_select :city_id, City.all, :id, :cityName, {:include_blank => 'Odaberite grad'}, {class: "btn btn-primary dropdown-toggle custom_re_dropdown"} %>
+            <%=  f.submit "Osvježi", class: "btn btn-large btn-primary"%>
+          <% end %>
+        </th>
+      </tr>
+    </table>
+
     <table style="width: 100%">
-      <div style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%">Grad: <%= @real_estates.first.city.cityName %></div>
-      
+      <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%">Grad: <%= @display_city ? @real_estates.first.city.cityName : 'Svi' %></td>
+        <td></td>
+      </tr>
       <% @real_estates.each do |real_estate| %>
         <tr style="border-bottom: 1px solid lightgray;">
-          <td style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%"><%= real_estate.realEstateName %></td>
+          <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to real_estate.realEstateName, real_estate %></td>
           <td></td>
         </tr>
       <% end %>
