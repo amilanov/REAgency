@@ -37,6 +37,7 @@ REAgency::Application.routes.draw do
   match '/real_estates_by_city', to: 'reports#real_estates_by_city'
   match '/number_of_real_estates_per_user', to: 'reports#number_of_real_estates_per_user'
   match '/total_number_of_users', to: 'reports#total_number_of_users'
+  match '/total_number_of_real_estates', to: 'reports#total_number_of_real_estates'
 
 
   # The priority is based upon order of creation:

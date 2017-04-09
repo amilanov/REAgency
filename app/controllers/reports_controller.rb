@@ -143,4 +143,14 @@ class ReportsController < ApplicationController
       format.json { render json: @real_estates }
     end
   end
+
+  def total_number_of_real_estates
+    @real_estates = RealEstate.all
+    @total = @real_estates.size
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
 end
