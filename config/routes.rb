@@ -42,6 +42,7 @@ REAgency::Application.routes.draw do
   match '/number_of_rented_real_estates', to: 'reports#number_of_rented_real_estates'
   match '/number_of_rented_by_city', to: 'reports#number_of_rented_by_city'
   match '/number_of_rented_real_estates_per_month', to: 'reports#number_of_rented_real_estates_per_month'
+  match '/number_of_rented_real_estates_per_user', to: 'reports#number_of_rented_real_estates_per_user'
 
 
   # The priority is based upon order of creation:

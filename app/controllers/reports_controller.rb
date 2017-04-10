@@ -198,13 +198,13 @@ class ReportsController < ApplicationController
   end
 
   def number_of_rented_real_estates_per_user
-    @real_estates = RealEstate.all
+    @rented = Contract.where(contractType: 'Izdavanje')
     @display_user = false
 
     if real_estates_from_params = params["real_states"]
       if user_id = real_estates_from_params["user_id"]
         unless user_id.empty?
-          @real_estates = RealEstate.where(user_id: user_id)
+          @rented = @rented.where(user_id: user_id)
           @username = User.where(id: user_id).first
           @display_user = true
         end
