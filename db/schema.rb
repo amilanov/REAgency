@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170407194644) do
+ActiveRecord::Schema.define(:version => 20170409235646) do
 
   create_table "activities", :force => true do |t|
     t.string   "activityName"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20170407194644) do
     t.integer  "city_id"
     t.integer  "user_id"
     t.integer  "real_estate_type_id"
+    t.boolean  "finished"
   end
 
   add_index "real_estates", ["city_id"], :name => "index_real_estates_on_city_id"

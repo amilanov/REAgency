@@ -153,4 +153,31 @@ class ReportsController < ApplicationController
       format.json { render json: @real_estates }
     end
   end
+
+  def number_of_rented_real_estates
+    @rented = Contract.where(contractType: 'Izdavanje')
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def number_of_rented_by_city
+    @rented = Contract.where(contractType: 'Izdavanje')
+    @display_city = false
+
+    if real_estates_from_params = params["real_states"]
+      if city_id = real_estates_from_params["city_id"]
+        unless city_id.empty?
+          @rented = Contract.eager_load(:real_estate).where(contracts: {contractType: 'Izdavanje'}, real_estates: {city_id: city_id})
+          @display_city = true unless @rented.empty?
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
 end

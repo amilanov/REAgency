@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-2">
+    <table style="width: 600px; margin-bottom: 10px;">
+      <tr>
+        <th>
+          <%= form_for("real_states", :html => { :class => "form-horizontal"}) do |f| %>
+              <%= f.collection_select :city_id, City.all, :id, :cityName, {:include_blank => 'Odaberite grad'}, {class: "btn btn-primary dropdown-toggle custom_re_dropdown"} %>
+            <%=  f.submit "Osvježi", class: "btn btn-large btn-primary"%>
+          <% end %>
+        </th>
+      </tr>
+    </table>
+
+    <table style="width: 100%">
+      <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; font-size: 20px; width: 30%">Grad: <%= @display_city ? @rented.first.real_estate.city.cityName : 'Svi' %></td>
+        <td></td>
+      </tr>
+      <% @rented.each do |rent| %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to rent.real_estate.realEstateName, rent.real_estate %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </table>
+    <div style="margin-top: 25px"><%= link_to 'Nazad', reports_path %></div>
+  </div>
+</div>

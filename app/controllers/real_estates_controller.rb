@@ -3,7 +3,6 @@ class RealEstatesController < ApplicationController
   # GET /real_estates
   # GET /real_estates.json
   def index
-    byebug
     @real_estates = RealEstate.paginate(page: params[:page])
 
     respond_to do |format|
@@ -183,6 +182,19 @@ class RealEstatesController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @real_estates }
+    end
+  end
+
+  def mark_as_finished
+    @real_estate = RealEstate.find(params[:id])
+    respond_to do |format|
+      if @real_estate.update_attributes(params[:real_estate])
+        format.html { redirect_to @real_estate }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @real_estate.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -12,7 +12,7 @@
 #
 
 class RealEstate < ActiveRecord::Base
-  attr_accessible :realEstateName
+  attr_accessible :realEstateName, :finished
 
   belongs_to :city
   belongs_to :user

@@ -31,6 +31,7 @@ REAgency::Application.routes.draw do
   match '/garages', to: 'real_estates#garages'
   match '/rooms', to: 'real_estates#rooms'
   match '/others', to: 'real_estates#others'
+  match '/mark_as_finished', to: 'real_estates#mark_as_finished'
 
   match '/monthly_articles', to: 'reports#monthly_articles'
   match '/contract_real_estates', to: 'real_estates#contract_real_estates'
@@ -38,6 +39,8 @@ REAgency::Application.routes.draw do
   match '/number_of_real_estates_per_user', to: 'reports#number_of_real_estates_per_user'
   match '/total_number_of_users', to: 'reports#total_number_of_users'
   match '/total_number_of_real_estates', to: 'reports#total_number_of_real_estates'
+  match '/number_of_rented_real_estates', to: 'reports#number_of_rented_real_estates'
+  match '/number_of_rented_by_city', to: 'reports#number_of_rented_by_city'
 
 
   # The priority is based upon order of creation:
