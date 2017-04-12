@@ -16,6 +16,6 @@
 class RealEstateDetail < ActiveRecord::Base
   belongs_to :real_estate
   attr_accessible :size, :condition, :note, :address, :description, :price, :num_of_rooms, :num_of_balconies, :num_of_bathrooms,
-                  :floor, :heating_system, :orientation, :windows, :year_of_manufacture, :aircondition, :elevator, :pantry
+                  :floor, :heating_system, :orientation, :windows, :year_of_manufacture, :aircondition, :elevator, :pantry, :latitude, :longitude
   validates :real_estate_id, presence: true
 end

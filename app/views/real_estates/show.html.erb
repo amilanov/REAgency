@@ -1,3 +1,8 @@
+<%= javascript_include_tag("//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js") %>
+<%= javascript_include_tag("https://code.jquery.com/jquery-1.10.2.min.js") %>
+<%= javascript_include_tag("http://maps.google.com/maps/api/js?key=AIzaSyC3nL5ClzQKlS_0gWyJkD4WAL7yMkRrAGQ&sensor=false&libraries=places") %>
+<%= javascript_include_tag("locationpicker.jquery.js") %>
+
 <div class="col-md-6 col-md-offset-0">
   <section>
   <div class="galleria">
@@ -9,31 +14,38 @@
       <% end %>
     <% end %>
   </div>
-  <% if current_user && current_user.can_create_real_estate? %>
-    <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
-  <% end %>
-
-  <% back_to_param = @back_to || real_estates_path %>
-  <%= link_to 'Nazad', back_to_param %>
-  
-  <% if current_user %>
-    <% if saved = SavedRealEstate.saved?(current_user, @real_estate.id) %>
-      <% if saved.empty? %>
-       | <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>  
-      <% else %>
-       | <span>Snimljeno</span>
-      <% end %>
-    <% else %>
-      | <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
+  <div style="padding-left: 10px">
+    <% if current_user && current_user.can_create_real_estate? %>
+      <%= link_to 'Uredi', edit_real_estate_path(@real_estate) %> |
     <% end %>
-  <% end %>
+
+    <% back_to_param = @back_to || real_estates_path %>
+    <%= link_to 'Nazad', back_to_param %>
+    
+    <% if current_user %>
+      <% if saved = SavedRealEstate.saved?(current_user, @real_estate.id) %>
+        <% if saved.empty? %>
+         | <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>  
+        <% else %>
+         | <span>Snimljeno</span>
+        <% end %>
+      <% else %>
+        | <%= link_to "Snimi", save_real_estate_path(:id => @real_estate.id) %>
+      <% end %>
+    <% end %>
+  </div>
+  </section>
+  <section style="padding-left: 10px">
+    <br/>
+    <div><b>Lokacija:</b></div>
+    <div id="map" style='width: 100%; height: 400px;'></div>
   </section>
 </div>
 
 <div class="col-md-5 col-md-offset-1">
-  
-    <div style="padding-bottom: 15px; font-size: 20px; border-bottom: 1px solid lightgray;"><b><%= @real_estate.realEstateName %></b></div>
-    <table style="width: 100%">
+  <section style="margin-top: 30px">
+    <div style="padding-bottom: 20px; font-size: 20px; border-bottom: 1px solid lightgray;"><b><%= @real_estate.realEstateName %></b></div>
+    <table style="width: 100%;">
       <tr style="border-bottom: 1px solid lightgray;">
         <td style="padding-top: 15px; padding-bottom: 15px; font-size: 20px; width: 30%"><%= @details.price %> KM</td>
         <td></td>
@@ -147,9 +159,10 @@
         </tr>
       <% end %>
     </table>
-    
-    <!-- <hr> -->
+  </section>
 </div>
+<br/>
+<br/>
 
 
 <%= javascript_include_tag('/galleria/galleria-1.5.5.min.js') %>
@@ -157,14 +170,19 @@
   (function() { 
     Galleria.loadTheme('/galleria/themes/classic/galleria.classic.min.js');
     Galleria.configure({
-      <!-- imageCrop: true, -->
       transition: 'fade',
       log: true,
-      // better handle image paths in assets folder!
       assets: true,
-      // if pic can't be loaded use this one as fallback
       dummy: '/assets/images/missing.png'
     });  
     Galleria.run('.galleria');
   }());
+
+  $('#map').locationpicker({
+      markerDraggable: false,
+      location: {
+          latitude: <%= @details.latitude || 0 %>,
+          longitude: <%= @details.longitude || 0 %>
+      }
+    });
 <% end %>

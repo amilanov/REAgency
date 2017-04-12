@@ -1,3 +1,7 @@
+<%= javascript_include_tag("https://code.jquery.com/jquery-1.10.2.min.js") %>
+<%= javascript_include_tag("http://maps.google.com/maps/api/js?key=AIzaSyC3nL5ClzQKlS_0gWyJkD4WAL7yMkRrAGQ&sensor=false&libraries=places") %>
+<%= javascript_include_tag("locationpicker.jquery.js") %>
+
 <%= form_for(@real_estate, :html => { :class => "form-horizontal", multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: @real_estate %>
 
@@ -22,7 +26,7 @@
     </span>
     <br/>
     <span>
-      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:selected => @selected_re_type ? @selected_re_type.id : nil, :include_blank => 'Please Select'} %>
+      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:include_blank => 'Please Select'} %>
     </span>
   </div>
 
@@ -34,7 +38,6 @@
     <%= file_field_tag "images[]", type: :file, multiple: true %>
   </div>
 
-
    <%= fields_for :real_estate_detail, @real_estate.real_estate_detail do |re_details_fields| %>
     <div class="form-group">
       <%= re_details_fields.label :Veličina_u_m2 %>
@@ -45,20 +48,26 @@
       <%= re_details_fields.text_field :condition, :class => "form-control" %>
     </div>
     <div class="form-group">
-      <%= re_details_fields.label :Napomena %>
-      <%= re_details_fields.text_field :note, :class => "form-control" %>
-    </div>
-    <div class="form-group">
       <%= re_details_fields.label :Adresa %>
       <%= re_details_fields.text_field :address, :class => "form-control" %>
     </div>
     <div class="form-group">
+      <%= re_details_fields.label :Napomena %>
+      <%= re_details_fields.text_area :note, :class => "form-control", :rows => "4" %>
+    </div>
+    <div class="form-group">
       <%= re_details_fields.label :Opis %>
-      <%= re_details_fields.text_field :description, :class => "form-control" %>
+      <%= re_details_fields.text_area :description, :class => "form-control custom-text-area", :rows => "15" %>
     </div>
   <% end %>
 
   <br/>
+  <%= hidden_field_tag 'latitude'%>
+  <%= hidden_field_tag 'longitude'%>
+  <div class="form-group">
+    <%= f.label :Lokacija %>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+  </div>
   <br/>
   <br/>
 
@@ -67,4 +76,14 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 real_estates_path, :class => 'btn btn-mini' %>
   </div>
+<% end %>
+
+<%= javascript_tag do %>
+  $('#map').locationpicker({
+    oninitialized: function (component) {},
+    onchanged: function (currentLocation, radius, isMarkerDropped) {
+      document.getElementById("latitude").value = currentLocation.latitude;
+      document.getElementById("longitude").value = currentLocation.longitude;
+    }
+  });
 <% end %>

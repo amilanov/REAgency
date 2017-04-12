@@ -64,6 +64,12 @@ class RealEstatesController < ApplicationController
           }
         end
         if re_detail = params[:real_estate_detail]
+          if latitude = params[:latitude]
+            re_detail[:latitude] = latitude unless latitude.empty?
+          end
+          if longitude = params[:longitude]
+            re_detail[:longitude] = longitude unless longitude.empty?
+          end
           @real_estate.create_real_estate_detail(re_detail)
         end
         format.html { redirect_to @real_estate, notice: 'Real estate was successfully created.' }
@@ -82,6 +88,16 @@ class RealEstatesController < ApplicationController
 
     respond_to do |format|
       if @real_estate.update_attributes(params[:real_estate])
+        if real_estate_detail_attrs = params[:real_estate_detail]
+          if latitude = params[:latitude]
+            real_estate_detail_attrs[:latitude] = latitude unless latitude.empty?
+          end
+          if longitude = params[:longitude]
+            real_estate_detail_attrs[:longitude] = longitude unless longitude.empty?
+          end
+          @real_estate.real_estate_detail.update_attributes(real_estate_detail_attrs)
+        end
+        # gu.update_attributes (:status => 'inactive')
         if params[:images]
           params[:images].each { |image|
             @real_estate.pictures.create(image: image)
