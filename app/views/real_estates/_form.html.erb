@@ -26,7 +26,9 @@
     </span>
     <br/>
     <span>
-      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, {:include_blank => 'Please Select'} %>
+      <% opts = { :include_blank => 'Please Select' } %>
+      <% opts.merge!(:selected => @selected_re_type.id) if @selected_re_type %>
+      <%= f.collection_select :real_estate_type_id, @re_types, :id, :realEstateType, opts %>
     </span>
   </div>
 
@@ -38,28 +40,72 @@
     <%= file_field_tag "images[]", type: :file, multiple: true %>
   </div>
 
-   <%= fields_for :real_estate_detail, @real_estate.real_estate_detail do |re_details_fields| %>
-    <div class="form-group">
-      <%= re_details_fields.label :Veličina_u_m2 %>
-      <%= re_details_fields.text_field :size, :class => "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= re_details_fields.label :Stanje %>
-      <%= re_details_fields.text_field :condition, :class => "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= re_details_fields.label :Adresa %>
-      <%= re_details_fields.text_field :address, :class => "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= re_details_fields.label :Napomena %>
-      <%= re_details_fields.text_area :note, :class => "form-control", :rows => "4" %>
-    </div>
-    <div class="form-group">
-      <%= re_details_fields.label :Opis %>
-      <%= re_details_fields.text_area :description, :class => "form-control custom-text-area", :rows => "15" %>
-    </div>
-  <% end %>
+    <% @re_type = @real_estate.real_estate_type || @selected_re_type %>
+    <%= fields_for :real_estate_detail, @real_estate.real_estate_detail do |re_details_fields| %>
+      <div class="form-group">
+        <%= re_details_fields.label :Cijena %>
+        <%= re_details_fields.text_field :price, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= re_details_fields.label :Veličina_u_m2 %>
+        <%= re_details_fields.text_field :size, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= re_details_fields.label :Adresa %>
+        <%= re_details_fields.text_field :address, :class => "form-control" %>
+      </div>
+
+      <div class="form-group", id="real_estate_detail_num_of_rooms_group">
+        <%= re_details_fields.label :Broj_soba %>
+        <%= re_details_fields.text_field :num_of_rooms, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_num_of_balconies_group">
+        <%= re_details_fields.label :Broj_balkona %>
+        <%= re_details_fields.text_field :num_of_balconies, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_num_of_bathrooms_group">
+        <%= re_details_fields.label :Broj_kupaonica %>
+        <%= re_details_fields.text_field :num_of_bathrooms, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_heating_system_group">
+        <%= re_details_fields.label :Grijanje %>
+        <%= re_details_fields.text_field :heating_system, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_aircondition_group">
+        <%= re_details_fields.label :Klima %>
+        <%= re_details_fields.text_field :aircondition, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_elevator_group">
+        <%= re_details_fields.label :Lift %>
+        <%= re_details_fields.text_field :elevator, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_pantry_group">
+        <%= re_details_fields.label :Ostava %>
+        <%= re_details_fields.text_field :pantry, :class => "form-control" %>
+      </div>
+
+      <div class="form-group", id="real_estate_detail_floor_group">
+        <%= re_details_fields.label :Sprat %>
+        <%= re_details_fields.text_field :floor, :class => "form-control" %>
+      </div>
+      <div class="form-group", id="real_estate_detail_orientation_group">
+        <%= re_details_fields.label :Orjentacija %>
+        <%= re_details_fields.text_field :orientation, :class => "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= re_details_fields.label :Stanje %>
+        <%= re_details_fields.text_field :condition, :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= re_details_fields.label :Napomena %>
+        <%= re_details_fields.text_area :note, :class => "form-control", :rows => "4" %>
+      </div>
+      <div class="form-group">
+        <%= re_details_fields.label :Opis %>
+        <%= re_details_fields.text_area :description, :class => "form-control custom-text-area", :rows => "15" %>
+      </div>
+    <% end %>
 
   <br/>
   <%= hidden_field_tag 'latitude'%>
@@ -85,5 +131,51 @@
       document.getElementById("latitude").value = currentLocation.latitude;
       document.getElementById("longitude").value = currentLocation.longitude;
     }
+  });
+
+  $(document).ready(function(){
+    var stuff = '<%= @re_type.realEstateType %>';
+    if(stuff == 'Stan' || stuff == 'Kuća') {
+        document.getElementById("real_estate_detail_num_of_rooms_group").style.display = 'block';
+        document.getElementById("real_estate_detail_num_of_balconies_group").style.display = 'block';
+        document.getElementById("real_estate_detail_num_of_bathrooms_group").style.display = 'block';
+        document.getElementById("real_estate_detail_heating_system_group").style.display = 'block';
+        document.getElementById("real_estate_detail_aircondition_group").style.display = 'block';
+        document.getElementById("real_estate_detail_elevator_group").style.display = 'block';
+        document.getElementById("real_estate_detail_pantry_group").style.display = 'block';
+    } else {
+      if(document.getElementById("real_estate_detail_num_of_rooms_group")) {
+        document.getElementById("real_estate_detail_num_of_rooms_group").style.display = 'none';
+      }
+    }
+
+    if(stuff == 'Garaža' || stuff == 'Balkon') {
+      document.getElementById("real_estate_detail_num_of_bathrooms_group").style.display = 'none';
+      document.getElementById("real_estate_detail_num_of_balconies_group").style.display = 'none';
+    }
+  });
+
+  $(function (){
+     $("#real_estate_real_estate_type_id").on("change", function (){
+      var val = $(this).val();
+      if(val == 1 || val == 2) {
+        document.getElementById("real_estate_detail_num_of_rooms_group").style.display = 'block';
+        document.getElementById("real_estate_detail_num_of_balconies_group").style.display = 'block';
+        document.getElementById("real_estate_detail_num_of_bathrooms_group").style.display = 'block';
+        document.getElementById("real_estate_detail_heating_system_group").style.display = 'block';
+        document.getElementById("real_estate_detail_aircondition_group").style.display = 'block';
+        document.getElementById("real_estate_detail_elevator_group").style.display = 'block';
+        document.getElementById("real_estate_detail_pantry_group").style.display = 'block';
+      } else {
+        if(document.getElementById("real_estate_detail_num_of_rooms_group")) {
+          document.getElementById("real_estate_detail_num_of_rooms_group").style.display = 'none';
+        }
+      }
+
+      if(val == 4 || val == 5) {
+        document.getElementById("real_estate_detail_num_of_bathrooms_group").style.display = 'none';
+        document.getElementById("real_estate_detail_num_of_balconies_group").style.display = 'none';
+      }
+     });
   });
 <% end %>

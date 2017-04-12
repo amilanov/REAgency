@@ -80,6 +80,60 @@
           <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.condition %></td>
         </tr>
       <% end %>
+      <% if @details.num_of_rooms %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj soba:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_rooms %></td>
+        </tr>
+      <% end %>
+      <% if @details.num_of_balconies %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj balkona:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_balconies %></td>
+        </tr>
+      <% end %>
+      <% if @details.num_of_bathrooms %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Broj kupaonica:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.num_of_bathrooms %></td>
+        </tr>
+      <% end %>
+      <% if @details.heating_system %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Grijanje:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.heating_system %></td>
+        </tr>
+      <% end %>
+      <% if @details.aircondition %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Klima:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.aircondition %></td>
+        </tr>
+      <% end %>
+      <% if @details.elevator %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Lift:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.elevator %></td>
+        </tr>
+      <% end %>
+      <% if @details.pantry %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Ostava:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.pantry %></td>
+        </tr>
+      <% end %>
+      <% if @details.floor %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Sprat:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.floor %></td>
+        </tr>
+      <% end %>
+      <% if @details.orientation %>
+        <tr style="border-bottom: 1px solid lightgray;">
+          <td><b>Orjentacija:</b></td>
+          <td style="padding-bottom: 10px; padding-top: 10px;"><%= @details.orientation %></td>
+        </tr>
+      <% end %>
       <% if @details.description %>
         <tr style="border-bottom: 1px solid lightgray;">
           <td><b>Opis:</b></td>
