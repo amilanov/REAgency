@@ -3,6 +3,7 @@ class RealEstatesController < ApplicationController
   # GET /real_estates
   # GET /real_estates.json
   def index
+    byebug
     @real_estates = RealEstate.paginate(page: params[:page])
 
     respond_to do |format|
@@ -14,6 +15,7 @@ class RealEstatesController < ApplicationController
   # GET /real_estates/1
   # GET /real_estates/1.json
   def show
+    byebug
     @real_estate = RealEstate.find(params[:id])
     @images      = @real_estate.pictures
     @details     = @real_estate.real_estate_detail
@@ -117,9 +119,10 @@ class RealEstatesController < ApplicationController
   def destroy
     @real_estate = RealEstate.find(params[:id])
     @real_estate.destroy
+    @back_to     = params[:back_to]
 
     respond_to do |format|
-      format.html { redirect_to real_estates_url }
+      format.html { redirect_to @back_to }
       format.json { head :no_content }
     end
   end
