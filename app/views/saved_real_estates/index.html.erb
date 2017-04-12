@@ -13,13 +13,14 @@
       </tr>
       <% @saved_real_estates.each do |saved_real_estate| %>
         <tr style="border-bottom: 1px solid lightgray;">
-          <% ret_real_estate = saved_real_estate.ret_real_estate %>
-          <td><%= saved_real_estate.id %></td>
-          <td><%= ret_real_estate.realEstateName %></td>
-          <td><%= ret_real_estate.real_estate_type.realEstateType %></td>
-          <td><%= saved_real_estate.created_at %></td>
-          <td><%= link_to 'Detalji', real_estate_path(id: ret_real_estate, back_to: saved_real_estates_path) %></td>
-          <td><%= link_to 'Obriši', saved_real_estate, confirm: 'Da li ste sigurni?', method: :delete %></td>
+          <% if ret_real_estate = saved_real_estate.ret_real_estate %>
+            <td><%= saved_real_estate.id %></td>
+            <td><%= ret_real_estate.realEstateName %></td>
+            <td><%= ret_real_estate.real_estate_type.realEstateType %></td>
+            <td><%= saved_real_estate.created_at %></td>
+            <td><%= link_to 'Detalji', real_estate_path(id: ret_real_estate, back_to: saved_real_estates_path) %></td>
+            <td><%= link_to 'Obriši', saved_real_estate, confirm: 'Da li ste sigurni?', method: :delete %></td>
+          <% end %>
         </tr>
       <% end %>
     </table>
