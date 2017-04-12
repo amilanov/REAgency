@@ -180,4 +180,41 @@ class ReportsController < ApplicationController
       format.json { render json: @real_estates }
     end
   end
+
+  def number_of_rented_real_estates_per_month
+    @rented = Contract.where(contractType: 'Izdavanje')
+    @months = {}
+
+    @rented.each do |re|
+      if month = re.created_at.strftime("%B")
+        (@months[month]||=[]) << re
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
+  def number_of_rented_real_estates_per_user
+    @rented = Contract.where(contractType: 'Izdavanje')
+    @display_user = false
+
+    if real_estates_from_params = params["real_states"]
+      if user_id = real_estates_from_params["user_id"]
+        unless user_id.empty?
+          @rented = @rented.where(user_id: user_id)
+          @username = User.where(id: user_id).first
+          @display_user = true
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @real_estates }
+    end
+  end
+
 end
