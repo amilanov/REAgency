@@ -17,10 +17,12 @@
         <td></td>
       </tr>
       <% @rented.each do |rent| %>
+      <% if rent.real_estate %>
         <tr style="border-bottom: 1px solid lightgray;">
           <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to rent.real_estate.realEstateName, rent.real_estate %></td>
           <td></td>
         </tr>
+      <% end %>
       <% end %>
     </table>
     <div style="margin-top: 25px"><%= link_to 'Nazad', reports_path %></div>

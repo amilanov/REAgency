@@ -3,7 +3,6 @@ class RealEstatesController < ApplicationController
   # GET /real_estates
   # GET /real_estates.json
   def index
-    byebug
     @real_estates = RealEstate.paginate(page: params[:page])
 
     respond_to do |format|
@@ -15,7 +14,6 @@ class RealEstatesController < ApplicationController
   # GET /real_estates/1
   # GET /real_estates/1.json
   def show
-    byebug
     @real_estate = RealEstate.find(params[:id])
     @images      = @real_estate.pictures
     @details     = @real_estate.real_estate_detail

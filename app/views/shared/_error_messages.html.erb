@@ -5,7 +5,28 @@
     </div>
     <ul>
       <% object.errors.full_messages.each do |msg| %>
-        <li>* <%= msg %></li>
+        <% # hardcoded message translation for demo purposes (it should be in Bosnian but initially is written in English) %>
+        <% if msg == "Realestatename can't be blank" %>
+          <li>* <%= "Polje naziv nekretnine ne smije biti prazno" %></li>
+        <% elsif msg == "City can't be blank" %>
+          <li>* <%= "Polje grad ne smije biti prazno" %></li>
+        <% elsif msg == "Password can't be blank" %>
+          <li>* <%= "Polje lozinka ne smije biti prazno" %></li>
+        <% elsif msg == "Password is too short (minimum is 6 characters)" %>
+          <li>* <%= "Lozinka mora sadržavati minimalno 6 karaktera" %></li>
+        <% elsif msg == "Password confirmation can't be blank" %>
+          <li>* <%= "Polje potvrda lozinke ne smije biti prazna" %></li>
+        <% elsif msg == "Email is invalid" %>
+          <li>* <%= "Email adresa nije validna" %></li>
+        <% elsif msg == "Password doesn't match confirmation" %>
+          <li>* <%= "Potvrda lozinke se ne podudara sa lozinkom" %></li>
+        <% elsif msg == "Username has already been taken" %>
+          <li>* <%= "Korisničko ime je već zauzeto" %></li>
+        <% elsif msg == "Email has already been taken" %>
+          <li>* <%= "Email adresa je već zauzeta" %></li>
+        <% else %>
+          <li>* <%= msg %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>

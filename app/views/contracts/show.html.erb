@@ -10,10 +10,12 @@
       <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.contractType %></td>
     </tr>
 
-    <tr style="border-bottom: 1px solid lightgray;">
-      <td><b>Nekretnina:</b></td>
-      <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.real_estate.realEstateName %></td>
-    </tr>
+    <% if @contract.real_estate %>
+      <tr style="border-bottom: 1px solid lightgray;">
+        <td><b>Nekretnina:</b></td>
+        <td style="padding-bottom: 10px; padding-top: 10px;"><%= @contract.real_estate.realEstateName %></td>
+      </tr>
+    <% end %>
 
     <tr style="border-bottom: 1px solid lightgray;">
       <td><b>Korisnik:</b></td>

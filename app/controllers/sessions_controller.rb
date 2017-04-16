@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       sign_in user
       redirect_back_or user
     else
-      flash.now[:error] = 'Invalid email/password combination'
+      flash.now[:error] = 'Pogrešno korisničko ime ili lozinka'
       render 'new'
     end
   end

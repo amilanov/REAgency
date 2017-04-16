@@ -7,10 +7,12 @@
           <td></td>
         </tr>
         <% month.each do |m| %>
-        <tr style="border-bottom: 1px solid lightgray;">
-          <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to m.real_estate.realEstateName, m %></td>
-          <td><%= m.created_at %></td>
-        </tr>
+        <% if m.real_estate %>
+          <tr style="border-bottom: 1px solid lightgray;">
+            <td style="padding-top: 10px; padding-bottom: 10px; width: 30%"><%= link_to m.real_estate.realEstateName, m %></td>
+            <td><%= m.created_at %></td>
+          </tr>
+        <% end %>
         <% end %>
       <% end %>
     </table>
